@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full bg-[#fbf9f6] text-[#141210] antialiased selection:bg-[#141210] selection:text-[#fbf9f6]">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATHLETE ARCHITECTURE — Planification & Coaching Expert</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    },
+                    colors: {
+                        cream: '#fbf9f6',
+                        line: '#e5ded5',
+                        ink: '#141210',
+                        muted: '#7a736a',
+                        terracotta: '#9e4624'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fbf9f6;
+            color: #141210;
+        }
+        h1, h2, h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            letter-spacing: -0.035em;
+        }
+        .hairline-b { border-bottom: 1px solid #e5ded5; }
+        .hairline-t { border-top: 1px solid #e5ded5; }
+        .hairline { border: 1px solid #e5ded5; }
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-thumb { background: #d3c8bb; }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="min-h-full flex flex-col justify-between">
+
+    <!-- Editorial Top Bar -->
+    <header class="hairline-b bg-[#fbf9f6]/95 backdrop-blur sticky top-0 z-30">
+        <div class="max-w-6xl mx-auto px-6 sm:px-12 h-20 flex items-center justify-between">
+            <div class="flex items-baseline space-x-4 cursor-pointer" onclick="navigate('overview')">
+                <span class="text-lg font-bold tracking-tight uppercase text-ink">ATHLETE ARCHITECTURE</span>
+                <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-muted hidden sm:inline">TRAIL & STRENGTH LAB</span>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex items-center space-x-6 sm:space-x-10 text-[11px] font-semibold uppercase tracking-[0.2em]">
+                <button onclick="navigate('overview')" id="nav-overview" class="text-ink transition-opacity">01. Vue d'Ensemble</button>
+                <button onclick="navigate('plan')" id="nav-plan" class="text-muted hover:text-ink transition-opacity">02. Plan de Charge</button>
+                <button onclick="navigate('config')" id="nav-config" class="text-muted hover:text-ink transition-opacity">03. Événement & Programmes</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-6xl w-full mx-auto px-6 sm:px-12 py-12 space-y-16">
+
+        <!-- ================= SECTION 01: VUE D'ENSEMBLE ================= -->
+        <section id="view-overview" class="space-y-16">
+            
+            <!-- Hero Block -->
+            <div class="space-y-6 pt-4">
+                <div class="flex items-center space-x-3 text-[10px] font-mono tracking-[0.25em] uppercase text-muted">
+                    <span>INDEX NO. 01</span>
+                    <span>/</span>
+                    <span id="targetSportBadge">PROGRAMME ACTIF</span>
+                </div>
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold text-ink tracking-tighter leading-none" id="overviewRaceTitle">
+                    Trail des Crêtes
+                </h1>
+                
+                <!-- Race Parameters -->
+                <div class="hairline-t hairline-b py-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-xs">
+                    <div>
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-muted block mb-1">Distance Cible</span>
+                        <div class="text-2xl font-bold tracking-tight text-ink" id="statDistance">28 <span class="text-xs font-mono font-normal text-muted">km</span></div>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-muted block mb-1">Dénivelé Positif</span>
+                        <div class="text-2xl font-bold tracking-tight text-ink" id="statElevation">+1 450 <span class="text-xs font-mono font-normal text-muted">m D+</span></div>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-muted block mb-1">Ratio Pente Cible</span>
+                        <div class="text-2xl font-bold tracking-tight text-ink" id="statGradient">52 <span class="text-xs font-mono font-normal text-muted">m D+/km</span></div>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-muted block mb-1">Compte à Rebours</span>
+                        <div class="text-2xl font-bold tracking-tight text-terracotta" id="statCountdown">J-45</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prochaine séance planifiée -->
+            <div class="space-y-6">
+                <div class="flex items-center justify-between text-[11px] font-mono uppercase tracking-widest text-muted">
+                    <span>PROCHAINE SÉANCE PLANIFIÉE</span>
+                    <span id="nextSessionDateText" class="font-medium text-ink">--</span>
+                </div>
+
+                <div id="nextSessionCard" class="hairline p-8 sm:p-12 space-y-6 bg-white transition-all shadow-sm">
+                    <!-- Injected dynamically via JS -->
+                </div>
+            </div>
+
+            <!-- Synergies multi-programmes -->
+            <div class="space-y-6">
+                <div class="flex items-center justify-between text-[11px] font-mono uppercase tracking-widest text-muted">
+                    <span>PROGRAMMES CUMULÉS EN SYNERGIE</span>
+                    <button onclick="navigate('config')" class="text-ink hover:underline text-[10px]">+ Modifier</button>
+                </div>
+
+                <div id="synergyList" class="divide-y divide-[#e5ded5] hairline-t hairline-b">
+                    <!-- Injected dynamically via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 02: PLAN DE CHARGE ================= -->
+        <section id="view-plan" class="hidden space-y-12">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 hairline-b pb-6">
+                <div>
+                    <span class="text-[10px] font-mono uppercase tracking-[0.25em] text-muted block mb-1">PLANIFICATEUR EXPERT</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-ink">Calendrier & Séances Datées</h2>
+                </div>
+
+                <div class="flex items-center space-x-6 text-[11px] font-mono uppercase">
+                    <button onclick="filterPlan('all')" id="btn-filter-all" class="text-ink font-semibold">Toutes</button>
+                    <button onclick="filterPlan('trail')" id="btn-filter-trail" class="text-muted hover:text-ink">Trail</button>
+                    <button onclick="filterPlan('running')" id="btn-filter-running" class="text-muted hover:text-ink">Course</button>
+                    <button onclick="filterPlan('strength')" id="btn-filter-strength" class="text-muted hover:text-ink">Renforcement</button>
+                </div>
+            </div>
+
+            <div id="planWeeksStream" class="space-y-12">
+                <!-- Injected dynamically via JS -->
+            </div>
+        </section>
+
+        <!-- ================= SECTION 03: CONFIGURATION ================= -->
+        <section id="view-config" class="hidden space-y-12">
+            <div class="max-w-2xl space-y-4">
+                <span class="text-[10px] font-mono uppercase tracking-[0.25em] text-muted block">PARAMÉTRAGE DE L'ÉPREUVE</span>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-ink">Spécificités & Disciplines</h2>
+                <p class="text-xs text-muted leading-relaxed font-sans">
+                    L'algorithme adapte les durées physiologiques, les ratios de dénivelé et les séances de renforcement directement en fonction des spécificités techniques de votre objectif.
+                </p>
+            </div>
+
+            <form id="configForm" onsubmit="handleConfigSubmit(event)" class="space-y-12">
+                
+                <div class="space-y-8 hairline-t pt-8">
+                    <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-ink">01. Caractéristiques de l'Événement</h3>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 text-xs">
+                        <div class="space-y-2">
+                            <label class="text-[11px] font-mono uppercase tracking-wider text-muted block">Nom de la Course ou Objectif</label>
+                            <input type="text" id="cfgEventName" required placeholder="Ex: Trail du Ventoux" class="w-full bg-transparent hairline p-3 font-serif text-base text-ink focus:outline-none focus:border-ink">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-[11px] font-mono uppercase tracking-wider text-muted block">Date de l'Épreuve</label>
+                            <input type="date" id="cfgEventDate" required class="w-full bg-transparent hairline p-3 font-mono text-xs text-ink focus:outline-none focus:border-ink">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-[11px] font-mono uppercase tracking-wider text-muted block">Distance Prévue (km)</label>
+                            <input type="number" id="cfgDistance" required min="3" max="250" placeholder="Ex: 35" class="w-full bg-transparent hairline p-3 font-mono text-base text-ink focus:outline-none focus:border-ink">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-[11px] font-mono uppercase tracking-wider text-muted block">Dénivelé Positif Cible (+m D+)</label>
+                            <input type="number" id="cfgElevation" required min="0" max="12000" placeholder="Ex: 1800" class="w-full bg-transparent hairline p-3 font-mono text-base text-ink focus:outline-none focus:border-ink">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-[11px] font-mono uppercase tracking-wider text-muted block">Profil & Technicité du Terrain</label>
+                            <select id="cfgTerrain" class="w-full bg-transparent hairline p-3 font-mono text-xs text-ink focus:outline-none focus:border-ink">
+                                <option value="rolling">Roulant & Pistes larges (priorité foulée)</option>
+                                <option value="mountain" selected>Montagneux / Sentiers singles (bâtons & côtes)</option>
+                                <option value="technical">Très technique / Fortes pentes (excentrique lourd)</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-[11px] font-mono uppercase tracking-wider text-muted block">Ambition Chronométrique</label>
+                            <select id="cfgGoal" class="w-full bg-transparent hairline p-3 font-mono text-xs text-ink focus:outline-none focus:border-ink">
+                                <option value="finisher">Finisher en confort & gestion</option>
+                                <option value="performance" selected>Optimisation du chrono / Allure cible</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-8 hairline-t pt-8">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-ink">02. Programmes Combinés</h3>
+                        <span class="text-[10px] font-mono text-muted uppercase">Harmonisation automatique</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <label class="hairline p-6 block cursor-pointer hover:border-ink transition-all">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs font-semibold uppercase tracking-wider">Trail Running</span>
+                                <input type="checkbox" id="cfgHasTrail" checked class="accent-ink">
+                            </div>
+                            <p class="text-[11px] text-muted leading-relaxed">Sorties longues progressives, gestion du D+, relances et travail de foulée en descente.</p>
+                        </label>
+
+                        <label class="hairline p-6 block cursor-pointer hover:border-ink transition-all">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs font-semibold uppercase tracking-wider">Course Plat / VMA</span>
+                                <input type="checkbox" id="cfgHasRunning" checked class="accent-ink">
+                            </div>
+                            <p class="text-[11px] text-muted leading-relaxed">Développement de la cylindrée aérobie, seuil et économie de course sur le plat.</p>
+                        </label>
+
+                        <label class="hairline p-6 block cursor-pointer hover:border-ink transition-all">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs font-semibold uppercase tracking-wider">Renforcement & PPG</span>
+                                <input type="checkbox" id="cfgHasStrength" checked class="accent-ink">
+                            </div>
+                            <p class="text-[11px] text-muted leading-relaxed">Gainage dynamique, stabilité de cheville, travail excentrique pour encaisser les descentes.</p>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="space-y-8 hairline-t pt-8">
+                    <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-ink">03. Niveau Athlétique & Matériel</h3>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 text-xs">
+                        <div class="space-y-2">
+                            <label class="text-[11px] font-mono uppercase tracking-wider text-muted block">Volume Hebdomadaire Actuel</label>
+                            <select id="cfgWeeklyBase" class="w-full bg-transparent hairline p-3 font-mono text-xs text-ink focus:outline-none">
+                                <option value="2">2 à 3 séances / semaine (2h - 4h)</option>
+                                <option value="4" selected>3 à 5 séances / semaine (4h - 7h)</option>
+                                <option value="6">5+ séances / semaine (7h+ / Athlète régulier)</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-[11px] font-mono uppercase tracking-wider text-muted block">Matériel Accessible</label>
+                            <div class="pt-2 flex flex-wrap gap-4 text-xs font-mono">
+                                <label class="inline-flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" id="cfgEquipPoles" checked class="accent-ink">
+                                    <span>Bâtons Trail</span>
+                                </label>
+                                <label class="inline-flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" id="cfgEquipWeights" checked class="accent-ink">
+                                    <span>Haltères / Kettlebell</span>
+                                </label>
+                                <label class="inline-flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" id="cfgEquipBands" checked class="accent-ink">
+                                    <span>Bandes élastiques</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-6">
+                    <button type="submit" class="w-full py-5 bg-ink text-[#fbf9f6] text-xs uppercase tracking-[0.25em] font-semibold hover:bg-terracotta transition-colors">
+                        Calculer & Générer le Plan d'Entraînement
+                    </button>
+                </div>
+            </form>
+        </section>
+
+    </main>
+
+    <!-- ================= FULL SESSION DETAIL MODAL ================= -->
+    <div id="sessionDetailModal" class="fixed inset-0 bg-ink/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 sm:p-6 hidden">
+        <div class="bg-[#fbf9f6] hairline max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden animate-fadeIn">
+            
+            <!-- Modal Header -->
+            <div class="hairline-b p-6 sm:p-8 flex items-start justify-between bg-white">
+                <div class="space-y-2">
+                    <div class="flex flex-wrap items-center gap-3 text-[11px] font-mono uppercase tracking-wider">
+                        <span id="detailDisciplineBadge" class="text-terracotta font-bold">DISCIPLINE</span>
+                        <span class="text-muted">/</span>
+                        <span id="detailDateBadge" class="bg-[#eee6dc] text-ink px-2.5 py-0.5 font-medium">DATE</span>
+                        <span class="text-muted">/</span>
+                        <span id="detailDurationBadge" class="font-bold text-ink">45 MIN</span>
+                    </div>
+                    <h2 id="detailSessionTitle" class="text-2xl sm:text-3xl font-bold tracking-tight text-ink">Titre de la Séance</h2>
+                    <p id="detailCircuitType" class="text-xs font-mono text-terracotta uppercase tracking-widest font-semibold">PROTOCOLE</p>
+                </div>
+                <button onclick="closeSessionDetailModal()" class="text-muted hover:text-ink text-xl p-2 transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body (Scrollable Exercises List) -->
+            <div class="p-6 sm:p-8 overflow-y-auto space-y-6 flex-grow">
+                <div class="hairline p-4 bg-white/70">
+                    <span class="text-[10px] font-mono uppercase tracking-widest text-muted block mb-1">CONSIGNE GÉNÉRALE DU COACH</span>
+                    <p id="detailSessionGuidance" class="text-xs font-mono text-ink leading-relaxed">Consignes...</p>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between text-[11px] font-mono uppercase tracking-wider text-muted">
+                        <span>DÉROULÉ DÉTAILLÉ DU PROTOCOLE</span>
+                        <span>SÉRIES & RÉPÉTITIONS</span>
+                    </div>
+
+                    <div id="detailExercisesContainer" class="space-y-4">
+                        <!-- Dynamically filled -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="hairline-t p-6 bg-white flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="text-[11px] font-mono text-muted">
+                    Respectez scrupuleusement les temps de récupération et la posture.
+                </div>
+                <div class="flex items-center space-x-4 w-full sm:w-auto">
+                    <button onclick="closeSessionDetailModal()" class="flex-1 sm:flex-initial px-6 py-3 border border-ink text-ink text-xs font-mono uppercase tracking-wider hover:bg-black/5 transition-colors">
+                        Fermer
+                    </button>
+                    <button id="detailValidateBtn" class="flex-1 sm:flex-initial px-6 py-3 bg-ink text-[#fbf9f6] text-xs font-mono uppercase tracking-wider hover:bg-terracotta transition-colors">
+                        Valider cette séance
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Feedback / Rapport de séance -->
+    <div id="feedbackModal" class="fixed inset-0 bg-ink/50 backdrop-blur-sm z-50 flex items-center justify-center p-6 hidden">
+        <div class="bg-[#fbf9f6] hairline max-w-md w-full p-8 space-y-6 shadow-xl">
+            <div class="flex items-baseline justify-between hairline-b pb-4">
+                <span class="text-xs font-mono uppercase tracking-widest text-muted">RAPPORT DE SÉANCE</span>
+                <button onclick="closeFeedbackModal()" class="text-xs text-muted hover:text-ink"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="space-y-4 text-xs">
+                <div class="space-y-1">
+                    <label class="text-[10px] font-mono uppercase tracking-wider text-muted block">Statut</label>
+                    <select id="modalSessionStatus" class="w-full bg-transparent hairline p-2.5 font-mono text-xs">
+                        <option value="completed">Séance réalisée avec succès</option>
+                        <option value="adapted">Adaptée (raccourcie / modifiée)</option>
+                        <option value="missed">Non réalisée</option>
+                    </select>
+                </div>
+
+                <div class="space-y-1">
+                    <div class="flex justify-between items-center text-[10px] font-mono uppercase text-muted">
+                        <span>RPE Ressenti (1-10)</span>
+                        <span id="modalRpeNumber" class="text-ink font-bold">RPE 6</span>
+                    </div>
+                    <input type="range" id="modalSessionRpe" min="1" max="10" value="6" class="w-full accent-ink" oninput="document.getElementById('modalRpeNumber').innerText = 'RPE ' + this.value">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-[10px] font-mono uppercase tracking-wider text-muted block">Notes & Sensations</label>
+                    <textarea id="modalSessionNotes" rows="3" placeholder="Sensations musculaires, météo, alimentation..." class="w-full bg-transparent hairline p-2.5 font-mono text-xs focus:outline-none"></textarea>
+                </div>
+            </div>
+
+            <div class="flex justify-end space-x-4 pt-2">
+                <button onclick="closeFeedbackModal()" class="text-xs font-mono uppercase tracking-wider text-muted">Fermer</button>
+                <button onclick="saveFeedbackModal()" class="px-5 py-2.5 bg-ink text-[#fbf9f6] text-xs font-mono uppercase tracking-wider hover:bg-terracotta transition-colors">Valider</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="hairline-t py-12 mt-16 text-muted text-[11px] font-mono uppercase tracking-[0.15em]">
+        <div class="max-w-6xl mx-auto px-6 sm:px-12 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>ATHLETE ARCHITECTURE — SYNERGY ENGINE</div>
+            <div class="flex items-center space-x-6">
+                <button onclick="resetToDemo()" class="hover:text-ink">Données Démo</button>
+                <span>/</span>
+                <span>CALIBRATION SCIENTIFIQUE</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const STORAGE_KEY = 'ATHLETE_EDITORIAL_STATE_V3';
+
+        let appState = {
+            event: {
+                name: "Trail du Ventoux",
+                date: "2026-11-29",
+                distance: 29,
+                elevation: 1520,
+                terrain: "mountain",
+                goal: "performance"
+            },
+            disciplines: {
+                trail: true,
+                running: true,
+                strength: true
+            },
+            level: {
+                weeklyBase: 4,
+                poles: true,
+                weights: true,
+                bands: true
+            },
+            sessions: []
+        };
+
+        let currentActiveSessionId = null;
+        let currentFilter = 'all';
+
+        function saveState() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+            } catch (err) {
+                console.error("Erreur de sauvegarde:", err);
+            }
+        }
+
+        function loadState() {
+            try {
+                const stored = localStorage.getItem(STORAGE_KEY);
+                if (stored) {
+                    const parsed = JSON.parse(stored);
+                    appState = {
+                        ...appState,
+                        ...parsed,
+                        event: { ...appState.event, ...(parsed.event || {}) },
+                        disciplines: { ...appState.disciplines, ...(parsed.disciplines || {}) },
+                        level: { ...appState.level, ...(parsed.level || {}) }
+                    };
+                }
+            } catch (err) {
+                console.error("Erreur de chargement:", err);
+            }
+
+            // Always ensure sessions exist and have valid exercises
+            if (!appState.sessions || appState.sessions.length === 0 || !appState.sessions[0].exercises) {
+                generateExpertPlan();
+                saveState();
+            }
+        }
+
+        function populateConfigForm() {
+            if (!appState.event) return;
+
+            const setValue = (id, val) => {
+                const el = document.getElementById(id);
+                if (el && val !== undefined) el.value = val;
+            };
+            const setChecked = (id, val) => {
+                const el = document.getElementById(id);
+                if (el && val !== undefined) el.checked = !!val;
+            };
+
+            setValue('cfgEventName', appState.event.name);
+            setValue('cfgEventDate', appState.event.date);
+            setValue('cfgDistance', appState.event.distance);
+            setValue('cfgElevation', appState.event.elevation);
+            setValue('cfgTerrain', appState.event.terrain);
+            setValue('cfgGoal', appState.event.goal);
+
+            setChecked('cfgHasTrail', appState.disciplines.trail);
+            setChecked('cfgHasRunning', appState.disciplines.running);
+            setChecked('cfgHasStrength', appState.disciplines.strength);
+
+            setValue('cfgWeeklyBase', appState.level.weeklyBase);
+            setChecked('cfgEquipPoles', appState.level.poles);
+            setChecked('cfgEquipWeights', appState.level.weights);
+            setChecked('cfgEquipBands', appState.level.bands);
+        }
+
+        function handleConfigSubmit(event) {
+            event.preventDefault();
+
+            appState.event.name = document.getElementById('cfgEventName').value || 'Mon Défi';
+            appState.event.date = document.getElementById('cfgEventDate').value;
+            appState.event.distance = parseFloat(document.getElementById('cfgDistance').value) || 25;
+            appState.event.elevation = parseInt(document.getElementById('cfgElevation').value, 10) || 1000;
+            appState.event.terrain = document.getElementById('cfgTerrain').value;
+            appState.event.goal = document.getElementById('cfgGoal').value;
+
+            appState.disciplines.trail = document.getElementById('cfgHasTrail').checked;
+            appState.disciplines.running = document.getElementById('cfgHasRunning').checked;
+            appState.disciplines.strength = document.getElementById('cfgHasStrength').checked;
+
+            appState.level.weeklyBase = parseInt(document.getElementById('cfgWeeklyBase').value, 10) || 4;
+            appState.level.poles = document.getElementById('cfgEquipPoles').checked;
+            appState.level.weights = document.getElementById('cfgEquipWeights').checked;
+            appState.level.bands = document.getElementById('cfgEquipBands').checked;
+
+            generateExpertPlan();
+            saveState();
+            renderAllViews();
+            navigate('overview');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadState();
+            populateConfigForm();
+            renderAllViews();
+
+            // Close modal on Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeSessionDetailModal();
+                    closeFeedbackModal();
+                }
+            });
+
+            // Close modal on backdrop click
+            const detailModal = document.getElementById('sessionDetailModal');
+            if (detailModal) {
+                detailModal.addEventListener('click', (e) => {
+                    if (e.target === detailModal) closeSessionDetailModal();
+                });
+            }
+        });
+
+        function navigate(viewName) {
+            ['overview', 'plan', 'config'].forEach(v => {
+                const el = document.getElementById(`view-${v}`);
+                const nav = document.getElementById(`nav-${v}`);
+                if (v === viewName) {
+                    el.classList.remove('hidden');
+                    nav.className = 'text-ink font-semibold transition-opacity';
+                } else {
+                    el.classList.add('hidden');
+                    nav.className = 'text-muted hover:text-ink transition-opacity';
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // GENERATE CALENDAR WITH DETAILED EXERCISES
+        function generateExpertPlan() {
+            const today = new Date();
+            today.setHours(0,0,0,0);
+
+            const dayOfWeek = today.getDay();
+            const diffToMonday = (dayOfWeek === 0 ? -6 : 1) - dayOfWeek;
+            const startMonday = new Date(today);
+            startMonday.setDate(today.getDate() + diffToMonday);
+
+            const targetDate = new Date(appState.event.date);
+            targetDate.setHours(0,0,0,0);
+
+            const diffTime = targetDate - today;
+            let totalWeeks = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 7));
+            if (totalWeeks < 2) totalWeeks = 4;
+            if (totalWeeks > 16) totalWeeks = 16;
+
+            const sessions = [];
+            const raceDist = appState.event.distance;
+            const raceElev = appState.event.elevation;
+            const gradientRatio = Math.round(raceElev / Math.max(1, raceDist));
+
+            const formatDate = (d) => {
+                const dayStr = d.toLocaleDateString('fr-FR', { weekday: 'long' });
+                return dayStr.charAt(0).toUpperCase() + dayStr.slice(1) + ' ' + d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+            };
+
+            for (let w = 1; w <= totalWeeks; w++) {
+                const isTaper = (w > totalWeeks - 2);
+                const isPeak = (w === totalWeeks - 2);
+                const isDeload = (w % 3 === 0 && !isPeak && !isTaper);
+
+                let weekProgress = w / totalWeeks;
+                let volumeFactor = isTaper ? 0.6 : (isDeload ? 0.75 : (0.8 + 0.35 * weekProgress));
+
+                const currentWeekMonday = new Date(startMonday);
+                currentWeekMonday.setDate(startMonday.getDate() + ((w - 1) * 7));
+
+                // 1. Trail Hill repeats (Mardi)
+                if (appState.disciplines.trail && !isTaper) {
+                    const sessionDate = new Date(currentWeekMonday);
+                    sessionDate.setDate(currentWeekMonday.getDate() + 1);
+
+                    const trailHillExercises = [
+                        { section: "1. Échauffement & Déverrouillage", name: "Footing progressif & Lignes droites", equipment: "Chaussures Trail", sets: "1 bloc", reps: "15 minutes", rest: "Continu", tempo: "RPE 4-5", notes: "Commencer très lentement, finir par 3 montées de genoux et foulées bondissantes." },
+                        { section: "2. Corps de Séance — Fractionné Côte", name: "Répétitions en côte raide (8 à 12%)", equipment: appState.level.poles ? "Bâtons optionnels" : "Sans bâtons", sets: "8 séries", reps: "45 secondes à fond", rest: "Redescente trot lent", tempo: "RPE 8-9 (Seuil anaérobie)", notes: "Attaque médio-pied dynamique, buste légèrement incliné, relance 10m après le sommet." },
+                        { section: "3. Spécifique Descente & Excentrique", name: "Descente rythmée & absorption articulaire", equipment: "Chaussures Trail", sets: "3 sections", reps: "150m à 200m", rest: "Marche de remontée", tempo: "Cadence élevée (>180 ppm)", notes: "Bassin bas, foulée rasante et légère pour habituer les quadriceps au freinage mécanique." },
+                        { section: "4. Retour au Calme", name: "Trot de décompression & étirements légers", equipment: "Poids de corps", sets: "1 bloc", reps: "10 minutes", rest: "Continu", tempo: "RPE 3", notes: "Hydratation minérale immédiate." }
+                    ];
+
+                    sessions.push({
+                        id: `s_${w}_trail_cotes`,
+                        week: w,
+                        dateIso: sessionDate.toISOString().split('T')[0],
+                        dateFormatted: formatDate(sessionDate),
+                        timestamp: sessionDate.getTime(),
+                        discipline: 'trail',
+                        tag: 'Fractionné Côtes & Puissance',
+                        title: `Côtes & Descentes Excentriques`,
+                        circuitType: "PROTOCOLE PUISSANCE & VITESSE EN D+",
+                        duration: Math.round(50 * volumeFactor),
+                        distance: 8,
+                        elevation: Math.round(320 * volumeFactor),
+                        rpe: 8,
+                        guidance: `Échauffement 15'. 8x 45s en côte soutenue (RPE 8). Redescente dynamique pour habituer les quadriceps au choc mécanique.`,
+                        status: 'pending',
+                        notes: '',
+                        exercises: trailHillExercises
+                    });
+                }
+
+                // 2. Road Running / Flat Aerobic (Jeudi)
+                if (appState.disciplines.running) {
+                    const sessionDate = new Date(currentWeekMonday);
+                    sessionDate.setDate(currentWeekMonday.getDate() + 3);
+                    const dur = Math.round(45 * volumeFactor);
+
+                    const runFlatExercises = isTaper ? [
+                        { section: "1. Activation", name: "Footing très facile en aisance respiratoire", equipment: "Chaussures Running", sets: "1 bloc", reps: "25 minutes", rest: "Continu", tempo: "RPE 4 (Zone 1/2)", notes: "Conversation aisée possible sans essoufflement." },
+                        { section: "2. Lignes Droites", name: "Accélérations progressives sur plat", equipment: "Chaussures Running", sets: "4 accélérations", reps: "80 à 100 mètres", rest: "Marche retour", tempo: "Rythme fluide 85%", notes: "Maintenir le relâchement des épaules et des bras, foulée dynamique." }
+                    ] : [
+                        { section: "1. Échauffement & Gammes", name: "Footing continu + Éducatifs de course", equipment: "Chaussures Running", sets: "1 bloc", reps: "15 minutes", rest: "Continu", tempo: "RPE 5", notes: "Talons-fesses, griffés du sol pour optimiser le retour élastique de la cheville." },
+                        { section: "2. Bloc Travail au Seuil Aérobie", name: "Fractions à allure semi-marathon", equipment: "Montre chrono", sets: "2 à 3 séries", reps: "10 minutes", rest: "2 min trot lent", tempo: "RPE 7 (Zone 3/4)", notes: "Rythme régulier au métronome, posture haute, respiration rythmée 2/2." },
+                        { section: "3. Retour au Calme", name: "Footing de décélération", equipment: "Poids de corps", sets: "1 bloc", reps: "8 minutes", rest: "Continu", tempo: "RPE 3", notes: "Baisse progressive du rythme cardiaque." }
+                    ];
+
+                    sessions.push({
+                        id: `s_${w}_run_seuil`,
+                        week: w,
+                        dateIso: sessionDate.toISOString().split('T')[0],
+                        dateFormatted: formatDate(sessionDate),
+                        timestamp: sessionDate.getTime(),
+                        discipline: 'running',
+                        tag: 'Aérobie & Seuil',
+                        title: isTaper ? `Footing d'Aisance & Lignes Droites` : `Endurance Fondamentale & Allure Seuil`,
+                        circuitType: isTaper ? "SÉANCE D'AFFÛTAGE & FLUIDITÉ" : "DÉVELOPPEMENT SEUIL & ÉCONOMIE",
+                        duration: dur,
+                        distance: Math.round(dur / 5.5),
+                        elevation: 0,
+                        rpe: isTaper ? 5 : 6,
+                        guidance: `Course sur terrain plat ou ondulé. 10' échauffement + 2x 10' allure semi-marathon en contrôle ventilatoire strict.`,
+                        status: 'pending',
+                        notes: '',
+                        exercises: runFlatExercises
+                    });
+                }
+
+                // 3. Renforcement Musculaire & PPG (Vendredi)
+                if (appState.disciplines.strength) {
+                    const sessionDate = new Date(currentWeekMonday);
+                    sessionDate.setDate(currentWeekMonday.getDate() + 4);
+                    const dur = isTaper ? 25 : (appState.event.terrain === 'technical' ? 45 : 35);
+
+                    const strengthExercises = isTaper ? [
+                        { section: "1. Activation & Mobilité", name: "Knee-to-Wall (Dorsiflexion cheville)", equipment: "Poids de corps", sets: "2 séries", reps: "10 rép / côté", rest: "30s", tempo: "Contrôlé", notes: "Mobiliser la cheville sans décoller le talon pour préparer l'absorption des chocs." },
+                        { section: "1. Mobilité Bassin", name: "Cossack Squats fluides", equipment: "Poids de corps", sets: "2 séries", reps: "8 rép / côté", rest: "45s", tempo: "Fluide", notes: "Ouverture des hanches et étirement dynamique des adducteurs." },
+                        { section: "2. Gainage Réactif", name: "Planche dynamique avec élévation de bras", equipment: "Tapis", sets: "3 séries", reps: "30s", rest: "30s", tempo: "Isométrie", notes: "Conserver le bassin parfaitement neutre, simuler le portage du sac." }
+                    ] : [
+                        { section: "1. Activation & Mobilité Articulaire", name: "Dorsiflexion cheville au mur & Cossack Squat", equipment: "Poids de corps", sets: "2 séries", reps: "10 par côté", rest: "30s", tempo: "2-0-2", notes: "Déverrouille l'axe cheville/genou pour supporter les descentes raides." },
+                        { section: "2. Bloc Force & Excentrique (Protection Descentes)", name: "Fentes Bulgares avec tempo excentrique lent", equipment: appState.level.weights ? "Haltères / Kettlebell" : "Poids de corps", sets: "4 séries", reps: "8 à 10 par jambe", rest: "1 min 15", tempo: "3-1-1 (Descente 3s)", notes: "Crucial pour armer les quadriceps contre la casse musculaire des descentes prolongées." },
+                        { section: "2. Bloc Force & Excentrique (Protection Descentes)", name: "Step-Down contrôlé sur marche", equipment: "Marche / Banc", sets: "3 séries", reps: "10 par jambe", rest: "1 min", tempo: "3-0-1", notes: "Contrôlez la descente sur une seule jambe, alignement parfait genou-orteil." },
+                        { section: "3. Chaîne Postérieure & Proprioception", name: "RDL Unipodal (Soulevé de terre 1 jambe)", equipment: appState.level.weights ? "Haltère léger" : "Poids de corps", sets: "3 séries", reps: "8 par jambe", rest: "45s", tempo: "2-1-1", notes: "Renforce les ischio-jambiers et stabilise la voûte plantaire." },
+                        { section: "3. Chaîne Postérieure & Proprioception", name: "Élévations mollets (Soléaire) genou fléchi", equipment: "Mur / Poids", sets: "3 séries", reps: "15 par jambe", rest: "45s", tempo: "2-2-1", notes: "Prévention spécifique contre les tendinopathies d'Achille en côte." },
+                        { section: "4. Gainage Anti-Rotation & Core", name: "Planche latérale avec abduction de hanche", equipment: appState.level.bands ? "Élastique cheville" : "Poids de corps", sets: "3 séries", reps: "35s par côté", rest: "30s", tempo: "Isométrique", notes: "Stabilisation du bassin et moyen fessier lors de la pose d'appui en dévers." }
+                    ];
+
+                    sessions.push({
+                        id: `s_${w}_str_ppg`,
+                        week: w,
+                        dateIso: sessionDate.toISOString().split('T')[0],
+                        dateFormatted: formatDate(sessionDate),
+                        timestamp: sessionDate.getTime(),
+                        discipline: 'strength',
+                        tag: 'Renforcement Spécifique',
+                        title: `PPG Excentrique & Stabilité Cheville`,
+                        circuitType: isTaper ? "CIRCUIT MOBILITÉ & ACTIVATION LÉGÈRE" : "CIRCUIT FORCE EXCENTRIQUE & ANTI-CHOC",
+                        duration: dur,
+                        distance: 0,
+                        elevation: 0,
+                        rpe: isTaper ? 4 : 6,
+                        guidance: `Squats bulgares (protection genou en descente), travail unipodal proprioceptif, gainage latéral et élévations mollets pour protéger le tendon d'Achille.`,
+                        status: 'pending',
+                        notes: '',
+                        exercises: strengthExercises
+                    });
+                }
+
+                // 4. Long Run Trail (Dimanche)
+                if (appState.disciplines.trail) {
+                    const sessionDate = new Date(currentWeekMonday);
+                    sessionDate.setDate(currentWeekMonday.getDate() + 6);
+
+                    const longRunTargetDist = isTaper 
+                        ? Math.round(raceDist * 0.4) 
+                        : Math.min(raceDist * 0.85, Math.round(raceDist * (0.45 + 0.35 * (w / totalWeeks))));
+                    
+                    const longRunElev = isTaper
+                        ? Math.round(raceElev * 0.35)
+                        : Math.min(raceElev * 0.85, Math.round(raceElev * (0.45 + 0.35 * (w / totalWeeks))));
+
+                    const longRunDuration = Math.round((longRunTargetDist * 7.5) + (longRunElev * 0.08));
+
+                    const trailExercises = [
+                        { section: "1. Échauffement & Montée en Température", name: "Trot progressif & mobilité dynamique des hanches", equipment: "Chaussures Trail", sets: "1 bloc", reps: "15 minutes", rest: "Continu", tempo: "RPE 4", notes: "Augmentation progressive du rythme cardiaque sans forcer." },
+                        { section: "2. Corps de Séance Spécifique", name: `Gestion du dénivelé continu (+${longRunElev}m D+)`, equipment: appState.level.poles ? "Bâtons de trail recommandés" : "Sans bâtons", sets: "1 bloc continu", reps: `${longRunTargetDist} km`, rest: "Boire tous les 20'", tempo: `Ratio ~${gradientRatio}m D+/km`, notes: appState.level.poles ? "Alterner poussée active des bâtons sur les montées raides et relance dès la crête." : "Mains sur les cuisses en côte, foulée courte et légère." },
+                        { section: "3. Technique de Descente", name: "Travail du relâchement et pose d'appui médio-pied", equipment: "Chaussures Trail", sets: "En cours de sortie", reps: "Sections descendantes", rest: "Continu", tempo: "Cadence haute (>175 ppm)", notes: "Regard porté 4-5 mètres devant soi, centre de gravité projeté légèrement vers l'avant." }
+                    ];
+
+                    sessions.push({
+                        id: `s_${w}_trail_long`,
+                        week: w,
+                        dateIso: sessionDate.toISOString().split('T')[0],
+                        dateFormatted: formatDate(sessionDate),
+                        timestamp: sessionDate.getTime(),
+                        discipline: 'trail',
+                        tag: 'Sortie Spécifique D+',
+                        title: isTaper ? `Rando-Course d'Affûtage (${longRunTargetDist} km)` : `Sortie Longue Clé — ${longRunTargetDist} km / +${longRunElev}m D+`,
+                        circuitType: "PROTOCOLE SORTIE LONGUE & D+",
+                        duration: longRunDuration,
+                        distance: longRunTargetDist,
+                        elevation: longRunElev,
+                        rpe: isTaper ? 5 : 7,
+                        guidance: `Simuler le profil de la course (${gradientRatio}m D+/km). ${appState.level.poles ? 'Alterner poussée bâtons en montées raides.' : 'Mains sur genoux en côte.'} Boire 500ml/h.`,
+                        status: 'pending',
+                        notes: '',
+                        exercises: trailExercises
+                    });
+                }
+            }
+
+            sessions.sort((a,b) => a.timestamp - b.timestamp);
+            appState.sessions = sessions;
+        }
+
+        function renderAllViews() {
+            renderOverview();
+            renderPlan();
+        }
+
+        function renderOverview() {
+            document.getElementById('overviewRaceTitle').innerText = appState.event.name;
+            document.getElementById('statDistance').innerHTML = `${appState.event.distance} <span class="text-xs font-mono font-normal text-muted">km</span>`;
+            document.getElementById('statElevation').innerHTML = `+${appState.event.elevation} <span class="text-xs font-mono font-normal text-muted">m D+</span>`;
+            
+            const gradient = Math.round(appState.event.elevation / Math.max(1, appState.event.distance));
+            document.getElementById('statGradient').innerHTML = `${gradient} <span class="text-xs font-mono font-normal text-muted">m/km</span>`;
+
+            const today = new Date();
+            today.setHours(0,0,0,0);
+            const targetDate = new Date(appState.event.date);
+            const daysLeft = Math.ceil((targetDate - today) / (1000 * 60 * 60 * 24));
+            document.getElementById('statCountdown').innerText = daysLeft > 0 ? `J-${daysLeft}` : 'Échéance';
+
+            const nextSession = appState.sessions.find(s => s.status === 'pending') || appState.sessions[0];
+            const nextCard = document.getElementById('nextSessionCard');
+
+            if (nextSession) {
+                document.getElementById('nextSessionDateText').innerText = nextSession.dateFormatted || `Semaine ${nextSession.week}`;
+
+                nextCard.innerHTML = `
+                    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 hairline-b pb-4">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-terracotta font-semibold">${nextSession.discipline.toUpperCase()}</span>
+                            <span class="text-xs text-muted font-mono">/ Semaine ${nextSession.week}</span>
+                            <span class="text-xs text-ink font-semibold font-mono">📅 ${nextSession.dateFormatted}</span>
+                        </div>
+                        <span class="text-xs font-mono text-muted">Cible RPE ${nextSession.rpe}/10</span>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-ink">${nextSession.title}</h2>
+                        <p class="text-xs font-mono text-muted leading-relaxed">${nextSession.guidance}</p>
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-between gap-4 pt-4 hairline-t">
+                        <div class="flex items-center space-x-6 text-xs font-mono text-ink">
+                            <span><strong>${nextSession.duration}</strong> min</span>
+                            ${nextSession.distance > 0 ? `<span><strong>${nextSession.distance}</strong> km</span>` : ''}
+                            ${nextSession.elevation > 0 ? `<span class="text-terracotta"><strong>+${nextSession.elevation}m</strong> D+</span>` : ''}
+                        </div>
+
+                        <div class="flex items-center space-x-3">
+                            <button type="button" onclick="openSessionDetail('${nextSession.id}')" class="px-5 py-2.5 border border-ink text-ink text-[11px] font-mono uppercase tracking-widest hover:bg-ink hover:text-[#fbf9f6] transition-colors cursor-pointer">
+                                Consulter les Exercices
+                            </button>
+                            <button type="button" onclick="openFeedbackModal('${nextSession.id}')" class="px-6 py-2.5 bg-ink text-[#fbf9f6] text-[11px] font-mono uppercase tracking-widest hover:bg-terracotta transition-colors cursor-pointer">
+                                Valider la Séance
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            const synList = document.getElementById('synergyList');
+            synList.innerHTML = '';
+            
+            const synItems = [];
+            if (appState.disciplines.trail) {
+                synItems.push({
+                    title: "Trail & Spécifique D+",
+                    desc: "Préparation musculaire aux montées raides et aux chocs excentriques en descente."
+                });
+            }
+            if (appState.disciplines.running) {
+                synItems.push({
+                    title: "Course sur Plat & Économie d'Énergie",
+                    desc: "Maintien de la vitesse de foulée et travail de seuil sans la fatigue du relief."
+                });
+            }
+            if (appState.disciplines.strength) {
+                synItems.push({
+                    title: "Renforcement Ciblé & PPG",
+                    desc: "Protection articulaire des genoux et chevilles, positionné 48h avant la sortie longue."
+                });
+            }
+
+            synItems.forEach(item => {
+                const el = document.createElement('div');
+                el.className = "py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs";
+                el.innerHTML = `
+                    <span class="font-semibold text-base text-ink">${item.title}</span>
+                    <span class="text-muted font-mono text-[11px]">${item.desc}</span>
+                `;
+                synList.appendChild(el);
+            });
+        }
+
+        function filterPlan(type) {
+            currentFilter = type;
+            ['all', 'trail', 'running', 'strength'].forEach(t => {
+                const btn = document.getElementById(`btn-filter-${t}`);
+                if (btn) {
+                    btn.className = (t === type) ? 'text-ink font-semibold' : 'text-muted hover:text-ink';
+                }
+            });
+            renderPlan();
+        }
+
+        // Toggle inline expansion directly in the plan list
+        function toggleInlineExercises(sessionId) {
+            const el = document.getElementById(`inline-ex-${sessionId}`);
+            const btn = document.getElementById(`inline-btn-${sessionId}`);
+            if (!el) return;
+
+            if (el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+                if (btn) btn.innerText = `↑ Masquer les exercices`;
+            } else {
+                el.classList.add('hidden');
+                const s = appState.sessions.find(x => x.id === sessionId);
+                const count = s && s.exercises ? s.exercises.length : 0;
+                if (btn) btn.innerText = `↓ Voir le détail des exercices (${count} modules)`;
+            }
+        }
+
+        function renderPlan() {
+            const stream = document.getElementById('planWeeksStream');
+            stream.innerHTML = '';
+
+            let filtered = appState.sessions;
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(s => s.discipline === currentFilter);
+            }
+
+            const weeks = {};
+            filtered.forEach(s => {
+                if (!weeks[s.week]) weeks[s.week] = [];
+                weeks[s.week].push(s);
+            });
+
+            const weekKeys = Object.keys(weeks).map(Number).sort((a,b) => a - b);
+
+            weekKeys.forEach(wNum => {
+                const list = weeks[wNum];
+                const block = document.createElement('div');
+                block.className = "space-y-4";
+
+                const totalDur = list.reduce((a,b) => a + b.duration, 0);
+                const totalDPlus = list.reduce((a,b) => a + (b.elevation || 0), 0);
+
+                const minTimestamp = Math.min(...list.map(s => s.timestamp || 0));
+                const maxTimestamp = Math.max(...list.map(s => s.timestamp || 0));
+                const rangeLabel = minTimestamp ? `Du ${new Date(minTimestamp).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })} au ${new Date(maxTimestamp).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}` : '';
+
+                block.innerHTML = `
+                    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between hairline-b pb-3 gap-1">
+                        <div class="flex items-baseline space-x-3">
+                            <h3 class="text-xl font-bold tracking-tight text-ink">Semaine ${wNum}</h3>
+                            <span class="text-[11px] font-mono text-ink font-medium">${rangeLabel}</span>
+                        </div>
+                        <div class="text-xs font-mono text-muted">
+                            ${Math.round(totalDur/60)}h${(totalDur%60).toString().padStart(2,'0')} ${totalDPlus > 0 ? `• +${totalDPlus}m D+` : ''}
+                        </div>
+                    </div>
+                `;
+
+                const listEl = document.createElement('div');
+                listEl.className = "divide-y divide-[#e5ded5] hairline-b";
+
+                list.forEach(s => {
+                    const isDone = s.status === 'completed';
+                    const item = document.createElement('div');
+                    item.className = `py-5 space-y-4 transition-colors ${isDone ? 'opacity-60' : ''}`;
+
+                    const exCount = s.exercises ? s.exercises.length : 0;
+
+                    // Generate inline exercises HTML
+                    let inlineExercisesHtml = '';
+                    if (s.exercises && s.exercises.length > 0) {
+                        let curSec = '';
+                        inlineExercisesHtml = s.exercises.map((ex, idx) => {
+                            let secHeader = '';
+                            if (ex.section && ex.section !== curSec) {
+                                curSec = ex.section;
+                                secHeader = `<div class="pt-3 pb-1 text-[11px] font-bold text-ink uppercase tracking-wider hairline-b">${curSec}</div>`;
+                            }
+                            return `
+                                ${secHeader}
+                                <div class="p-3 bg-[#f5efe6] hairline text-xs space-y-1">
+                                    <div class="flex justify-between items-baseline font-bold text-ink">
+                                        <span>${idx + 1}. ${ex.name}</span>
+                                        <span class="font-mono text-[10px] text-muted uppercase">${ex.equipment || ''}</span>
+                                    </div>
+                                    <div class="flex flex-wrap gap-4 text-[10px] font-mono text-muted pt-1">
+                                        <span>Vol: <strong class="text-ink">${ex.sets}</strong></span>
+                                        <span>Rép: <strong class="text-ink">${ex.reps}</strong></span>
+                                        <span>Repos: <strong class="text-ink">${ex.rest}</strong></span>
+                                        <span>Tempo: <strong class="text-ink">${ex.tempo || '-'}</strong></span>
+                                    </div>
+                                    ${ex.notes ? `<p class="text-[11px] text-stone-700 pt-1 font-sans"><span class="font-semibold text-[10px] font-mono text-ink">CONSIGNE :</span> ${ex.notes}</p>` : ''}
+                                </div>
+                            `;
+                        }).join('');
+                    }
+
+                    item.innerHTML = `
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <div class="space-y-1.5 flex-1">
+                                <div class="flex flex-wrap items-center gap-2 text-[10px] font-mono uppercase tracking-wider">
+                                    <span class="text-terracotta font-semibold">${s.discipline}</span>
+                                    <span class="text-muted">/ ${s.tag}</span>
+                                    <span class="bg-[#eee6dc] text-ink px-2 py-0.5 rounded text-[10px] font-medium tracking-normal">${s.dateFormatted}</span>
+                                </div>
+                                <div class="text-lg font-bold tracking-tight text-ink ${isDone ? 'line-through text-muted' : ''}">${s.title}</div>
+                                <p class="text-xs font-mono text-muted max-w-2xl">${s.guidance}</p>
+                                
+                                <div class="flex items-center space-x-4 pt-1">
+                                    <button type="button" id="inline-btn-${s.id}" onclick="toggleInlineExercises('${s.id}')" class="text-[11px] font-mono uppercase text-ink font-semibold hover:text-terracotta underline decoration-1 underline-offset-4 cursor-pointer">
+                                        ↓ Voir le détail des exercices (${exCount} modules)
+                                    </button>
+                                    <button type="button" onclick="openSessionDetail('${s.id}')" class="text-[11px] font-mono uppercase text-muted hover:text-ink cursor-pointer">
+                                        [Plein écran ↗]
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-6 text-xs font-mono">
+                                <div class="text-right">
+                                    <div>${s.duration} min ${s.distance > 0 ? `• ${s.distance}k` : ''}</div>
+                                    ${s.elevation > 0 ? `<div class="text-terracotta">+${s.elevation}m D+</div>` : '<div class="text-muted">Plat</div>'}
+                                </div>
+
+                                <button type="button" onclick="openFeedbackModal('${s.id}')" class="px-4 py-2 border border-ink text-[10px] uppercase tracking-widest font-mono hover:bg-ink hover:text-[#fbf9f6] transition-colors cursor-pointer">
+                                    ${isDone ? 'Fait ✓' : 'Valider'}
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Accordion Inline Details -->
+                        <div id="inline-ex-${s.id}" class="hidden space-y-2.5 pt-2 pl-4 border-l-2 border-stone-400">
+                            ${inlineExercisesHtml}
+                        </div>
+                    `;
+                    listEl.appendChild(item);
+                });
+
+                block.appendChild(listEl);
+                stream.appendChild(block);
+            });
+        }
+
+        // MODAL MANAGEMENT
+        function openSessionDetail(sessionId) {
+            const s = appState.sessions.find(x => x.id === sessionId);
+            if (!s) return;
+
+            const modal = document.getElementById('sessionDetailModal');
+            if (!modal) return;
+
+            document.getElementById('detailDisciplineBadge').innerText = (s.discipline || '').toUpperCase();
+            document.getElementById('detailDateBadge').innerText = s.dateFormatted || `Semaine ${s.week}`;
+            document.getElementById('detailDurationBadge').innerText = `${s.duration} MIN`;
+            document.getElementById('detailSessionTitle').innerText = s.title;
+            document.getElementById('detailSessionGuidance').innerText = s.guidance;
+            document.getElementById('detailCircuitType').innerText = s.circuitType || s.tag || 'SÉANCE DÉTAILLÉE';
+
+            const container = document.getElementById('detailExercisesContainer');
+            container.innerHTML = '';
+
+            if (s.exercises && s.exercises.length > 0) {
+                let currentSection = "";
+
+                s.exercises.forEach((ex, idx) => {
+                    if (ex.section && ex.section !== currentSection) {
+                        currentSection = ex.section;
+                        const secHeader = document.createElement('div');
+                        secHeader.className = "pt-4 pb-1 text-[11px] font-bold text-ink uppercase tracking-wider hairline-b";
+                        secHeader.innerText = currentSection;
+                        container.appendChild(secHeader);
+                    }
+
+                    const card = document.createElement('div');
+                    card.className = "hairline p-4 bg-white space-y-2";
+
+                    card.innerHTML = `
+                        <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                            <span class="text-sm font-bold text-ink">${idx + 1}. ${ex.name}</span>
+                            ${ex.equipment ? `<span class="text-[10px] text-muted uppercase tracking-wider font-mono">${ex.equipment}</span>` : ''}
+                        </div>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 text-[11px] hairline-t text-muted font-mono">
+                            <div><span class="text-[9px] uppercase tracking-widest text-muted block">Volume</span><strong class="text-ink">${ex.sets}</strong></div>
+                            <div><span class="text-[9px] uppercase tracking-widest text-muted block">Répétitions</span><strong class="text-ink">${ex.reps}</strong></div>
+                            <div><span class="text-[9px] uppercase tracking-widest text-muted block">Récupération</span><strong class="text-ink">${ex.rest}</strong></div>
+                            <div><span class="text-[9px] uppercase tracking-widest text-muted block">Tempo</span><strong class="text-ink">${ex.tempo || '-'}</strong></div>
+                        </div>
+
+                        ${ex.notes ? `<p class="text-[11px] font-sans text-stone-700 pt-2 hairline-t leading-relaxed"><span class="font-mono text-[10px] text-ink font-semibold">CONSIGNE D'EXPERT :</span> ${ex.notes}</p>` : ''}
+                    `;
+                    container.appendChild(card);
+                });
+            } else {
+                container.innerHTML = `
+                    <div class="p-6 hairline bg-white text-center text-muted font-mono text-xs">
+                        ${s.guidance}
+                    </div>
+                `;
+            }
+
+            const valBtn = document.getElementById('detailValidateBtn');
+            if (valBtn) {
+                valBtn.onclick = () => {
+                    closeSessionDetailModal();
+                    openFeedbackModal(s.id);
+                };
+            }
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSessionDetailModal() {
+            const modal = document.getElementById('sessionDetailModal');
+            if (modal) modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function openFeedbackModal(id) {
+            currentActiveSessionId = id;
+            const s = appState.sessions.find(x => x.id === id);
+            if (!s) return;
+
+            document.getElementById('modalSessionStatus').value = s.status === 'pending' ? 'completed' : s.status;
+            document.getElementById('modalSessionRpe').value = s.rpe || 6;
+            document.getElementById('modalRpeNumber').innerText = `RPE ${s.rpe || 6}`;
+            document.getElementById('modalSessionNotes').value = s.notes || '';
+
+            document.getElementById('feedbackModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeFeedbackModal() {
+            document.getElementById('feedbackModal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function saveFeedbackModal() {
+            if (!currentActiveSessionId) return;
+            const s = appState.sessions.find(x => x.id === currentActiveSessionId);
+            if (s) {
+                s.status = document.getElementById('modalSessionStatus').value;
+                s.rpe = parseInt(document.getElementById('modalSessionRpe').value);
+                s.notes = document.getElementById('modalSessionNotes').value;
+                saveState();
+                renderAllViews();
+            }
+            closeFeedbackModal();
+        }
+
+        function resetToDemo() {
+            localStorage.removeItem(STORAGE_KEY);
+            location.reload();
+        }
+    </script>
+</body>
+</html>
