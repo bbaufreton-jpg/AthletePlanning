@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ATHLETE ARCHITECTURE — Programme Complet Multi-Semaines</title>
+  <title>ATHLETE ARCHITECTURE — Dardi'Trail 2026</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,703 +43,347 @@
     .thin-border {
       border-color: rgba(28, 24, 20, 0.12);
     }
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 4px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #d3c7b2;
-      border-radius: 2px;
-    }
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #d3c7b2; border-radius: 2px; }
   </style>
 </head>
 <body class="min-h-full flex flex-col justify-between selection:bg-stone-200">
 
-  <!-- TOP BAR / HEADER -->
+  <!-- TOP BAR -->
   <header class="border-b thin-border bg-[#faf8f5]/90 backdrop-blur sticky top-0 z-30">
     <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
       <div class="flex items-center gap-3">
         <span class="w-2.5 h-2.5 rounded-full bg-accent"></span>
         <h1 class="font-semibold text-lg tracking-tight uppercase">ATHLETE ARCHITECTURE</h1>
       </div>
-      
       <nav class="flex items-center gap-6 text-sm font-medium">
-        <button onclick="switchTab('overview')" id="nav-overview" class="text-stone-900 border-b border-stone-900 pb-0.5 transition-all">Tableau de bord</button>
-        <button onclick="switchTab('plan')" id="nav-plan" class="text-stone-400 hover:text-stone-700 transition-all">Programme Complet</button>
-        <button onclick="switchTab('config')" id="nav-config" class="text-stone-400 hover:text-stone-700 transition-all">Événement & Réglages</button>
+        <button onclick="switchTab('overview')" id="nav-overview" class="text-stone-900 border-b border-stone-900 pb-0.5">Tableau de bord</button>
+        <button onclick="switchTab('plan')" id="nav-plan" class="text-stone-400 hover:text-stone-700">Programme Dardi'Trail</button>
       </nav>
     </div>
   </header>
 
-  <!-- MAIN CONTENT CONTAINER -->
+  <!-- MAIN CONTAINER -->
   <main class="max-w-6xl mx-auto px-6 py-10 flex-1 w-full">
 
-    <!-- VIEW 1: OVERVIEW -->
+    <!-- OVERVIEW VIEW -->
     <section id="view-overview" class="space-y-12">
-      <!-- HEADER BANNER -->
       <div class="border-b thin-border pb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div>
-          <span class="text-xs uppercase tracking-widest font-mono text-stone-500 mb-2 block">Planification Périodisée</span>
-          <h2 id="hero-event-name" class="text-3xl md:text-4xl font-bold tracking-tight text-stone-900">Trail des Aiguilles Rouges</h2>
-          <p id="hero-event-details" class="text-stone-600 mt-2 text-sm">42 km — 2800m D+ — Terrain Très technique / Montagne</p>
+          <span class="text-xs uppercase tracking-widest font-mono text-stone-500 mb-2 block">Préparation Objectif Cible</span>
+          <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-stone-900">Dardi'Trail 2026</h2>
+          <p class="text-stone-600 mt-2 text-sm">15 km — 400m D+ — Terrain Vallonné & Sous-bois — Finisher en gestion</p>
         </div>
         <div class="flex items-baseline gap-2 bg-stone-100 px-5 py-3 rounded-lg border thin-border">
-          <span class="text-xs text-stone-500 font-mono uppercase">Objectif dans</span>
-          <span id="countdown-days" class="text-3xl font-bold font-mono text-accent">--</span>
+          <span class="text-xs text-stone-500 font-mono uppercase">Jour J dans</span>
+          <span id="countdown-days" class="text-3xl font-bold font-mono text-accent">12</span>
           <span class="text-xs font-mono text-stone-500">jours</span>
         </div>
       </div>
 
-      <!-- TODAY'S SESSION HIGHLIGHT -->
+      <!-- NEXT SESSION CARD -->
       <div class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h3 class="text-xs font-mono uppercase tracking-widest text-stone-500">Prochaine Séance Recommandée</h3>
-          <span id="today-date" class="text-xs font-mono text-stone-500">Aujourd'hui</span>
-        </div>
-
+        <h3 class="text-xs font-mono uppercase tracking-widest text-stone-500">Prochaine Séance Recommandée</h3>
         <div id="today-card-container" class="bg-white border thin-border rounded-xl p-6 md:p-8 space-y-6 shadow-sm">
-          <!-- Populated by JS -->
+          <!-- Rendered via JS -->
         </div>
       </div>
 
-      <!-- METRICS GRID -->
+      <!-- STATS -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
         <div class="bg-white border thin-border p-6 rounded-xl space-y-2">
-          <span class="text-xs font-mono text-stone-500 uppercase">Durée de Préparation</span>
-          <div id="stat-weeks-total" class="text-2xl font-bold text-stone-900">-- semaines</div>
-          <p id="stat-phase-desc" class="text-xs text-stone-500">Du foncier à l'affûtage</p>
+          <span class="text-xs font-mono text-stone-500 uppercase">Ratio D+/km</span>
+          <div class="text-2xl font-bold text-stone-900">26.6 m/km</div>
+          <p class="text-xs text-stone-500">Profil vallonné relanceur</p>
         </div>
         <div class="bg-white border thin-border p-6 rounded-xl space-y-2">
-          <span class="text-xs font-mono text-stone-500 uppercase">Ratio D+/km Épreuve</span>
-          <div id="stat-ratio-deniv" class="text-2xl font-bold text-accent">-- m/km</div>
-          <p id="stat-ratio-desc" class="text-xs text-stone-500">Profil de pente du parcours</p>
+          <span class="text-xs font-mono text-stone-500 uppercase">Fréquence Hebdo</span>
+          <div class="text-2xl font-bold text-accent">3 séances / sem.</div>
+          <p class="text-xs text-stone-500">Mardi / Jeudi / Dimanche</p>
         </div>
         <div class="bg-white border thin-border p-6 rounded-xl space-y-2">
-          <span class="text-xs font-mono text-stone-500 uppercase">Total Séances Planifiées</span>
-          <div id="stat-total-sessions" class="text-2xl font-bold text-stone-900">-- séances</div>
-          <p class="text-xs text-stone-500">Harmonisation Trail + Renfo</p>
+          <span class="text-xs font-mono text-stone-500 uppercase">Matériel Utilisé</span>
+          <div class="text-2xl font-bold text-stone-900">Chaise, Élastique, Porte</div>
+          <p class="text-xs text-stone-500">Exercices personnalisés</p>
         </div>
       </div>
     </section>
 
-    <!-- VIEW 2: PROGRAM & SESSIONS -->
+    <!-- PROGRAM VIEW -->
     <section id="view-plan" class="hidden space-y-8">
-      <div class="flex flex-col md:flex-row justify-between md:items-center gap-4 border-b thin-border pb-6">
-        <div>
-          <h2 class="text-2xl font-bold tracking-tight text-stone-900">Programme Semaine par Semaine</h2>
-          <p class="text-stone-600 text-sm mt-1">Chaque semaine comporte ses phases spécifiques (Foncier, D+, Affûtage).</p>
-        </div>
-        <div class="flex gap-2">
-          <button onclick="filterSessions('all')" class="px-3 py-1.5 text-xs font-mono rounded border thin-border bg-stone-900 text-white">Toutes</button>
-          <button onclick="filterSessions('renfo')" class="px-3 py-1.5 text-xs font-mono rounded border thin-border bg-white text-stone-700 hover:bg-stone-100">Renforcement</button>
-          <button onclick="filterSessions('trail')" class="px-3 py-1.5 text-xs font-mono rounded border thin-border bg-white text-stone-700 hover:bg-stone-100">Trail / Course</button>
-        </div>
-      </div>
-
-      <!-- SESSIONS BY WEEK CONTAINER -->
-      <div id="weeks-container" class="space-y-10">
-        <!-- Rendered by JS -->
-      </div>
-    </section>
-
-    <!-- VIEW 3: CONFIGURATION -->
-    <section id="view-config" class="hidden max-w-2xl mx-auto space-y-8">
       <div class="border-b thin-border pb-6">
-        <h2 class="text-2xl font-bold tracking-tight text-stone-900">Configuration de la Préparation</h2>
-        <p class="text-stone-600 text-sm mt-1">Fixez votre date butoir : le moteur recalculera le calendrier complet sur toutes les semaines.</p>
+        <h2 class="text-2xl font-bold tracking-tight text-stone-900">Planning Complet — Dardi'Trail</h2>
+        <p class="text-stone-600 text-sm mt-1">2 semaines de préparation spécifique et d'affûtage.</p>
       </div>
 
-      <form id="config-form" onsubmit="event.preventDefault(); saveConfiguration();" class="space-y-6">
-        <div class="space-y-4">
-          <h3 class="text-sm font-semibold text-stone-900 border-b thin-border pb-2">1. Votre Événement & Date Butoir</h3>
-          <div>
-            <label class="block text-xs font-mono text-stone-600 mb-1">Nom de l'épreuve</label>
-            <input type="text" id="cfg-name" value="Trail des Aiguilles Rouges" class="w-full bg-white border thin-border rounded px-3 py-2 text-sm focus:outline-none focus:border-stone-900">
-          </div>
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-mono text-stone-600 mb-1">Date de l'événement (Jour J)</label>
-              <input type="date" id="cfg-date" value="2026-11-29" class="w-full bg-white border thin-border rounded px-3 py-2 text-sm focus:outline-none focus:border-stone-900">
-            </div>
-            <div>
-              <label class="block text-xs font-mono text-stone-600 mb-1">Distance totale (km)</label>
-              <input type="number" id="cfg-dist" value="42" min="1" class="w-full bg-white border thin-border rounded px-3 py-2 text-sm focus:outline-none focus:border-stone-900">
-            </div>
-          </div>
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-mono text-stone-600 mb-1">Dénivelé positif (m D+)</label>
-              <input type="number" id="cfg-deniv" value="2800" min="0" class="w-full bg-white border thin-border rounded px-3 py-2 text-sm focus:outline-none focus:border-stone-900">
-            </div>
-            <div>
-              <label class="block text-xs font-mono text-stone-600 mb-1">Type de terrain</label>
-              <select id="cfg-terrain" class="w-full bg-white border thin-border rounded px-3 py-2 text-sm focus:outline-none focus:border-stone-900">
-                <option value="technique" selected>Très technique / Montagne</option>
-                <option value="moyen">Moyen / Sentiers vallonnés</option>
-                <option value="roulant">Roulant / Pistes forestières</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div class="space-y-4 pt-4">
-          <h3 class="text-sm font-semibold text-stone-900 border-b thin-border pb-2">2. Matériel à disposition pour le Renforcement</h3>
-          <div class="grid grid-cols-2 gap-3 text-sm">
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" id="mat-door" checked class="rounded border-stone-300">
-              <span>Fixation porte / Ancrage</span>
-            </label>
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" id="mat-elastic" checked class="rounded border-stone-300">
-              <span>Élastiques de résistance</span>
-            </label>
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" id="mat-chair" checked class="rounded border-stone-300">
-              <span>Chaise / Banc / Step</span>
-            </label>
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" id="mat-wall" checked class="rounded border-stone-300">
-              <span>Espace mur libre</span>
-            </label>
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" id="mat-dumbbells" class="rounded border-stone-300">
-              <span>Haltères / Kettlebell</span>
-            </label>
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" id="mat-poles" checked class="rounded border-stone-300">
-              <span>Bâtons de trail</span>
-            </label>
-          </div>
-        </div>
-
-        <div class="pt-6">
-          <button type="submit" class="w-full bg-stone-900 text-white font-medium py-3 rounded hover:bg-stone-800 transition-all text-sm">
-            Générer le programme multi-semaines →
-          </button>
-        </div>
-      </form>
+      <div id="weeks-container" class="space-y-10">
+        <!-- Rendered via JS -->
+      </div>
     </section>
 
   </main>
 
-  <!-- FOOTER -->
-  <footer class="border-t thin-border py-6 bg-white text-xs text-stone-500 font-mono">
-    <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
-      <span>ATHLETE ARCHITECTURE — Smart Multi-Week Engine</span>
-      <span>Calcul du calendrier dynamique</span>
-    </div>
-  </footer>
-
-  <!-- FULLSCREEN SESSION MODAL -->
+  <!-- MODAL -->
   <div id="modal-container" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-[#faf8f5] border thin-border rounded-xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
-      <!-- Modal Header -->
       <div class="p-6 border-b thin-border flex justify-between items-start bg-white">
         <div>
-          <span id="modal-tag" class="text-xs font-mono uppercase tracking-widest text-accent font-semibold">Renforcement Spécifique</span>
-          <h3 id="modal-title" class="text-2xl font-bold text-stone-900 mt-1">Séance Trail & Stabilité</h3>
-          <p id="modal-subtitle" class="text-xs font-mono text-stone-500 mt-1">35 - 40 min — Organisé selon l'épreuve</p>
+          <span id="modal-tag" class="text-xs font-mono uppercase tracking-widest text-accent font-semibold">Renforcement</span>
+          <h3 id="modal-title" class="text-2xl font-bold text-stone-900 mt-1">Séance</h3>
+          <p id="modal-subtitle" class="text-xs font-mono text-stone-500 mt-1">Détails</p>
         </div>
         <button onclick="closeModal()" class="text-stone-400 hover:text-stone-900 text-2xl font-light">✕</button>
       </div>
-
-      <!-- Modal Body (Scrollable) -->
-      <div id="modal-body" class="p-6 space-y-8 overflow-y-auto custom-scrollbar flex-1">
-        <!-- JS rendered detailed workout content -->
-      </div>
-
-      <!-- Modal Footer -->
+      <div id="modal-body" class="p-6 space-y-8 overflow-y-auto custom-scrollbar flex-1"></div>
       <div class="p-4 border-t thin-border bg-white flex justify-end gap-3">
-        <button onclick="closeModal()" class="px-4 py-2 border thin-border text-xs font-mono rounded hover:bg-stone-50">Fermer</button>
-        <button id="modal-validate-btn" onclick="validateCurrentModalSession()" class="px-5 py-2 bg-stone-900 text-white text-xs font-mono rounded hover:bg-stone-800">Valider la séance</button>
+        <button onclick="closeModal()" class="px-4 py-2 border thin-border text-xs font-mono rounded">Fermer</button>
+        <button id="modal-validate-btn" onclick="validateCurrentModalSession()" class="px-5 py-2 bg-stone-900 text-white text-xs font-mono rounded">Valider la séance</button>
       </div>
     </div>
   </div>
 
-  <!-- SCRIPT ENGINE (MULTI-WEEK GENERATOR) -->
   <script>
-    // STATE
-    let appState = {
-      event: {
-        name: "Trail des Aiguilles Rouges",
-        date: "2026-11-29",
-        distance: 42,
-        deniv: 2800,
-        terrain: "technique"
-      },
-      equipment: {
-        door: true,
-        elastic: true,
-        chair: true,
-        wall: true,
-        dumbbells: false,
-        poles: true
-      },
-      weeks: [] // Stores week blocks with sessions
-    };
+    const STORAGE_KEY = "DARDI_TRAIL_PROGRAM_2026";
 
-    // GENERATE WORKOUT ROUTINE BASED ON EQUIPMENT AND PHASE
-    function buildRenfoWorkout(phase, ratio, eq) {
-      let isTapering = phase === "Affûtage";
-      let isHighSteepness = ratio > 40;
-
-      let exercises = [];
-
-      // Ex 1: Force Cuisses
-      if (eq.chair) {
-        exercises.push({
-          name: isTapering ? "1. Step-ups légers de rappel" : "1. Step-ups dynamiques explosifs",
-          mat: "Chaise / Step",
-          focus: isTapering ? "Maintien tonique sans fatigue" : "Poussée de jambe type fort D+ : Pousse fort sur le talon."
-        });
-      } else {
-        exercises.push({
-          name: "1. Squats contrôlés",
-          mat: "Poids du corps",
-          focus: "Focus alignement genou-cheville."
-        });
-      }
-
-      // Ex 2: Tirage / Haut du corps
-      if (eq.door) {
-        exercises.push({
-          name: "2. Tirage porte + Fente arrière",
-          mat: "Ancrage Porte",
-          focus: "Posture & Poussée Bâtons : Resserre les omoplates."
-        });
-      } else if (eq.elastic) {
-        exercises.push({
-          name: "2. Row debout à l'élastique",
-          mat: "Élastique sous les pieds",
-          focus: "Gainage haut du corps & fixation scapulaire."
-        });
-      } else {
-        exercises.push({
-          name: "2. Soulevé de terre unipodal (RDL)",
-          mat: "Poids du corps",
-          focus: "Ischio-jambiers & Fessiers."
-        });
-      }
-
-      // Ex 3: Excentrique Quadriceps (Descente)
-      if (eq.wall) {
-        exercises.push({
-          name: "3. Chaise murale + Décollement talons",
-          mat: "Mur",
-          focus: "Protection des genoux en descente raide."
-        });
-      } else {
-        exercises.push({
-          name: "3. Step-down excentrique",
-          mat: "Marche d'escalier",
-          focus: "Descente très lente contrôlée."
-        });
-      }
-
-      // Ex 4: Cheville / Moyen fessier
-      if (eq.elastic) {
-        exercises.push({
-          name: "4. Marche du monstre / Fentes latérales",
-          mat: "Élastique",
-          focus: "Moyen fessier & Stabilité cheville sur terrain instable."
-        });
-      } else {
-        exercises.push({
-          name: "4. Équilibre unipodal yeux fermés",
-          mat: "Poids du corps",
-          focus: "Proprioception cheville."
-        });
-      }
-
-      // Ex 5: Gainage
-      exercises.push({
-        name: "5. Gainage dynamique / Press Pallof",
-        mat: eq.door ? "Porte" : "Tapis de sol",
-        focus: "Gainage pour le port du sac à dos de trail."
-      });
-
-      return {
-        warmup: {
-          duration: "6 min",
-          instructions: "2 tours d'activation :",
-          items: ["40s course sur place", "40s montées de pointe", "40s squats légers", "40s fentes arrière"]
-        },
-        circuit: {
-          duration: isTapering ? "18 minutes" : "26 minutes",
-          structure: isTapering ? "3 tours légers — 30s travail / 30s repos" : "4 à 5 tours — 40s travail / 20s repos",
-          exercises: exercises
-        },
-        cooldown: {
-          duration: "5 min",
-          items: ["Étirements doux Quadriceps & Mollets", "2 min élévation des jambes (retour veineux)"]
-        }
-      };
-    }
-
-    // MULTI-WEEK GENERATION ENGINE
-    function generateFullProgram() {
-      const targetDate = new Date(appState.event.date);
-      const now = new Date();
-      const diffTime = targetDate - now;
-      const totalDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      
-      // Calculate total full weeks (minimum 2 weeks, max 16)
-      let numWeeks = Math.max(2, Math.min(16, Math.ceil(totalDays / 7)));
-      const ratio = Math.round(appState.event.deniv / appState.event.distance);
-
-      let weeks = [];
-      let currentDate = new Date();
-
-      for (let w = 1; w <= numWeeks; w++) {
-        // Determine phase
-        let phase = "Foncière";
-        if (w > numWeeks - 2) {
-          phase = "Affûtage"; // Last 2 weeks = tapering
-        } else if (w > Math.floor(numWeeks / 3)) {
-          phase = "Spécifique D+";
-        }
-
-        // Calculate week dates
-        const weekStart = new Date(currentDate);
-        const weekEnd = new Date(currentDate);
-        weekEnd.setDate(weekEnd.getDate() + 6);
-
-        // Week sessions
-        const session1Date = new Date(weekStart); // Mardi
-        session1Date.setDate(session1Date.getDate() + 1);
-
-        const session2Date = new Date(weekStart); // Jeudi
-        session2Date.setDate(session2Date.getDate() + 3);
-
-        const session3Date = new Date(weekStart); // Dimanche
-        session3Date.setDate(session3Date.getDate() + 6);
-
-        // Session volumes per phase
-        let renfoDur = phase === "Affûtage" ? "25 min" : "40 min";
-        let trail1Dur = phase === "Affûtage" ? "45 min" : "1h10";
-        let trail2Dur = phase === "Affûtage" ? "1h15" : (phase === "Spécifique D+" ? "2h40" : "1h45");
-        let dPlusTarget = phase === "Affûtage" ? Math.round(appState.event.deniv * 0.15) : (phase === "Spécifique D+" ? Math.round(appState.event.deniv * 0.5) : Math.round(appState.event.deniv * 0.25));
-
-        weeks.push({
-          weekNumber: w,
-          phase: phase,
-          dateRange: `Du ${formatShortDate(weekStart)} au ${formatShortDate(weekEnd)}`,
+    const programData = {
+      weeks: [
+        {
+          weekNumber: 1,
+          phase: "Spécifique & D+",
+          dateRange: "Du 12 au 18 Octobre 2026",
           sessions: [
             {
-              id: `w${w}-s1`,
-              date: formatDate(session1Date),
+              id: "w1-s1",
+              date: "Mardi 13 Octobre 2026",
               type: "Renforcement",
-              category: "renfo",
-              title: `Renfo Spécifique (${phase})`,
-              duration: renfoDur,
-              details: buildRenfoWorkout(phase, ratio, appState.equipment)
-            },
-            {
-              id: `w${w}-s2`,
-              date: formatDate(session2Date),
-              type: "Trail / Intassité",
-              category: "trail",
-              title: phase === "Spécifique D+" ? "Fract. Côte & Technique Descente" : "Seuil Vallonné & Relances",
-              duration: trail1Dur,
-              trailData: `${Math.round(dPlusTarget * 0.35)}m D+`,
+              title: "Renforcement Spécifique Trail (35 min)",
+              duration: "35 min",
+              completed: false,
               details: {
-                warmup: { duration: "15 min", instructions: "Footing progressif + éducatifs" },
+                warmup: { duration: "6 min", instructions: "2 tours sans pause :", items: ["40s course sur place", "40s montées de pointe", "40s squats légers", "40s fentes arrière"] },
                 circuit: {
-                  duration: "35 min",
-                  structure: phase === "Affûtage" ? "Rappels courts sans fatigue" : "Travail de pente soutenu",
+                  duration: "24 min",
+                  structure: "4 tours — 40s travail / 20s repos. 1m30 entre les tours.",
                   exercises: [
-                    { name: "Répétitions en Côte", mat: "Terrain de côte", focus: "Poussée active & buste droit" },
-                    { name: "Technique Descente", mat: "Sentier", focus: "Appuis légers avant-pied" }
+                    { name: "1. Step-ups dynamiques", mat: "Chaise", focus: "Poussée fort sur le talon, montée du genou opposé à 90°." },
+                    { name: "2. Tirage porte + Fente arrière", mat: "Ancrage Porte", focus: "Resserre les omoplates lors de la fente arrière." },
+                    { name: "3. Chaise murale + Monte-pointe", mat: "Mur libre", focus: "Endurance quadriceps & mollets." },
+                    { name: "4. Marche du monstre", mat: "Élastique aux cuisses", focus: "Pas latéraux semi-fléchis pour le moyen fessier." },
+                    { name: "5. Press Pallof", mat: "Ancrage Porte", focus: "Gainage anti-rotation du buste." }
                   ]
                 },
-                cooldown: { duration: "10 min", items: ["Retour au calme lent"] }
+                cooldown: { duration: "5 min", items: ["Étirements doux", "2 min allongé jambes sur la chaise"] }
               }
             },
             {
-              id: `w${w}-s3`,
-              date: formatDate(session3Date),
+              id: "w1-s2",
+              date: "Jeudi 15 Octobre 2026",
+              type: "Trail / Côtes",
+              title: "Course & Varia-Côtes (50 min / ~120m D+)",
+              duration: "50 min",
+              completed: false,
+              details: {
+                warmup: { duration: "15 min", instructions: "Footing EF + éducatifs" },
+                circuit: {
+                  duration: "25 min",
+                  structure: "Côtes & Relances",
+                  exercises: [
+                    { name: "6 x 1 min 30 en Côte (5-8%)", mat: "Terrain vallonné", focus: "Allure soutenue en aisance. Récupération en redescente lente." },
+                    { name: "10 min Sentier Vallonné", mat: "Sous-bois", focus: "Relances douces au sommet des bosquets." }
+                  ]
+                },
+                cooldown: { duration: "10 min", items: ["Footing très lent sur plat"] }
+              }
+            },
+            {
+              id: "w1-s3",
+              date: "Dimanche 18 Octobre 2026",
               type: "Sortie Longue",
-              category: "trail",
-              title: phase === "Affûtage" ? "Sortie Longue d'Affûtage" : "Sortie Longue Spécifique Épreuve",
-              duration: trail2Dur,
-              trailData: `${dPlusTarget}m D+`,
+              title: "Sortie Longue Spécifique (1h20 / ~250m D+)",
+              duration: "1h20",
+              completed: false,
               details: {
                 warmup: { duration: "10 min", instructions: "Mise en route lente" },
                 circuit: {
-                  duration: "1h30+",
-                  structure: "Gestion d'effort & Nutrition",
+                  duration: "1h00",
+                  structure: "Gestion & Hydratation",
                   exercises: [
-                    { name: "Montée régulière Zone 2", mat: appState.equipment.poles ? "Bâtons de trail" : "Poids du corps", focus: "Rythme cardiaque stabilisé" },
-                    { name: "Stratégie Ravito", mat: "Bidons + Gels", focus: "Apport glucidique toutes les 30 min" }
+                    { name: "Montées raides (>8%)", mat: "Mains sur cuisses", focus: "Marche active dès que la pente s'élève." },
+                    { name: "Test Hydratation / Ravito", mat: "Bidon d'eau", focus: "1 gorgée toutes les 15 min + 1 gel/compote à 45 min." }
                   ]
                 },
-                cooldown: { duration: "10 min", items: ["Marche & récupération"] }
+                cooldown: { duration: "10 min", items: ["Marche & Récupération"] }
               }
             }
           ]
-        });
+        },
+        {
+          weekNumber: 2,
+          phase: "Affûtage & Jour J",
+          dateRange: "Du 19 au 25 Octobre 2026",
+          sessions: [
+            {
+              id: "w2-s1",
+              date: "Mardi 20 Octobre 2026",
+              type: "Renforcement",
+              title: "Renfo Tonique & Rappel (25 min)",
+              duration: "25 min",
+              completed: false,
+              details: {
+                warmup: { duration: "5 min", instructions: "Mobilisation cheville & hanches" },
+                circuit: {
+                  duration: "15 min",
+                  structure: "3 tours légers — 30s travail / 30s repos",
+                  exercises: [
+                    { name: "Step-ups contrôlés", mat: "Chaise", focus: "Rappel léger sans fatigue." },
+                    { name: "Tirage porte léger", mat: "Porte", focus: "Fixation scapulaire." },
+                    { name: "Équilibre unipodal", mat: "Poids du corps", focus: "Proprioception cheville." }
+                  ]
+                },
+                cooldown: { duration: "5 min", items: ["Étirements doux"] }
+              }
+            },
+            {
+              id: "w2-s2",
+              date: "Jeudi 22 Octobre 2026",
+              type: "Course",
+              title: "Déblocage & Rappel d'Allure (35 min)",
+              duration: "35 min",
+              completed: false,
+              details: {
+                warmup: { duration: "15 min", instructions: "Footing très lent EF" },
+                circuit: {
+                  duration: "10 min",
+                  structure: "Rappels courts",
+                  exercises: [
+                    { name: "4 x 30s dynamiques sur plat", mat: "Terrain plat", focus: "Activation cardio sans créer de fatigue." }
+                  ]
+                },
+                cooldown: { duration: "10 min", items: ["Retour au calme très lent"] }
+              }
+            },
+            {
+              id: "w2-s3",
+              date: "Dimanche 25 Octobre 2026",
+              type: "Événement",
+              title: "🏁 DARDI'TRAIL (15 km / 400m D+)",
+              duration: "Jour J",
+              completed: false,
+              details: {
+                warmup: { duration: "10 min", instructions: "Trottinement & mouvements dynamiques avant le départ" },
+                circuit: {
+                  duration: "Course",
+                  structure: "Stratégie de gestion",
+                  exercises: [
+                    { name: "Km 0 à 3", mat: "Sous-bois", focus: "Départ très prudent, ne pas se cramer." },
+                    { name: "Km 3 à 10", mat: "Vallonné", focus: "Rythme régulier, marcher dans les montées raides." },
+                    { name: "Km 10 à 15", mat: "Pistes & Arrivée", focus: "Dérouler et prendre du plaisir jusqu'à la ligne !" }
+                  ]
+                },
+                cooldown: { duration: "10 min", items: ["Ravitaillement d'arrivée & Récupération"] }
+              }
+            }
+          ]
+        }
+      ]
+    };
 
-        // Advance 7 days
-        currentDate.setDate(currentDate.getDate() + 7);
-      }
+    let state = loadState() || programData;
 
-      appState.weeks = weeks;
-    }
+    function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+    function loadState() { const s = localStorage.getItem(STORAGE_KEY); return s ? JSON.parse(s) : null; }
 
-    // UTILS
-    function formatDate(date) {
-      return date.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
-    }
-
-    function formatShortDate(date) {
-      return date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
-    }
-
-    function calculateDaysToEvent() {
-      const evt = new Date(appState.event.date);
-      const now = new Date();
-      const diffDays = Math.ceil((evt - now) / (1000 * 60 * 60 * 24));
-      return diffDays > 0 ? diffDays : 0;
-    }
-
-    // RENDER OVERVIEW
     function renderOverview() {
-      const ratio = Math.round(appState.event.deniv / appState.event.distance);
-
-      document.getElementById('hero-event-name').innerText = appState.event.name;
-      document.getElementById('hero-event-details').innerText = `${appState.event.distance} km — ${appState.event.deniv}m D+ — Terrain ${appState.event.terrain === 'technique' ? 'Très technique' : 'Roulant'}`;
-      document.getElementById('countdown-days').innerText = calculateDaysToEvent();
-
-      document.getElementById('stat-weeks-total').innerText = `${appState.weeks.length} semaines`;
-      document.getElementById('stat-ratio-deniv').innerText = `${ratio} m/km`;
-      document.getElementById('stat-total-sessions').innerText = `${appState.weeks.length * 3} séances`;
-
-      // Highlight first session of Week 1
-      const firstSess = appState.weeks[0]?.sessions[0];
-      const todayCard = document.getElementById('today-card-container');
-
-      if (firstSess) {
-        todayCard.innerHTML = `
-          <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
-            <div>
-              <div class="flex items-center gap-2 mb-1">
-                <span class="px-2 py-0.5 text-[10px] font-mono uppercase bg-accent text-white rounded">${firstSess.type}</span>
-                <span class="text-xs font-mono text-stone-500">${firstSess.duration}</span>
-                <span class="text-xs font-mono text-stone-400">| Semaine 1 (Foncière)</span>
-              </div>
-              <h4 class="text-xl font-bold text-stone-900">${firstSess.title}</h4>
+      const nextSess = state.weeks[0].sessions[0];
+      document.getElementById('today-card-container').innerHTML = `
+        <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2 py-0.5 text-[10px] font-mono uppercase bg-accent text-white rounded">${nextSess.type}</span>
+              <span class="text-xs font-mono text-stone-500">${nextSess.duration}</span>
+              <span class="text-xs font-mono text-stone-400">| ${nextSess.date}</span>
             </div>
-            <div class="flex gap-3">
-              <button onclick="toggleSessionInline('${firstSess.id}')" class="px-4 py-2 border thin-border text-xs font-mono rounded bg-white hover:bg-stone-50">
-                Afficher le protocole ↓
-              </button>
-              <button onclick="openModal('${firstSess.id}')" class="px-4 py-2 bg-stone-900 text-white text-xs font-mono rounded hover:bg-stone-800">
-                Mode Entraînement ↗
-              </button>
-            </div>
+            <h4 class="text-xl font-bold text-stone-900">${nextSess.title}</h4>
           </div>
-
-          <div id="inline-${firstSess.id}" class="hidden pt-6 border-t thin-border space-y-6">
-            ${renderWorkoutHTML(firstSess.details)}
+          <div class="flex gap-3">
+            <button onclick="openModal('${nextSess.id}')" class="px-4 py-2 bg-stone-900 text-white text-xs font-mono rounded">Mode Entraînement ↗</button>
           </div>
-        `;
-      }
+        </div>
+      `;
     }
 
-    // RENDER MULTI-WEEK PROGRAM
-    function renderWeeksList(filter = 'all') {
+    function renderWeeksList() {
       const container = document.getElementById('weeks-container');
       container.innerHTML = '';
-
-      appState.weeks.forEach(week => {
-        const weekBlock = document.createElement('div');
-        weekBlock.className = "space-y-4 border-l-2 border-stone-300 pl-4 md:pl-6";
-
-        let weekHTML = `
-          <div class="flex items-baseline justify-between border-b thin-border pb-2">
-            <div>
-              <span class="text-xs font-mono uppercase tracking-widest text-accent font-semibold">Semaine ${week.weekNumber} — Phase ${week.phase}</span>
-              <h3 class="text-sm font-mono text-stone-500">${week.dateRange}</h3>
+      state.weeks.forEach(w => {
+        let html = `
+          <div class="space-y-4 border-l-2 border-stone-300 pl-4 md:pl-6">
+            <div class="border-b thin-border pb-2">
+              <span class="text-xs font-mono uppercase text-accent font-semibold">Semaine ${w.weekNumber} — ${w.phase}</span>
+              <h3 class="text-sm font-mono text-stone-500">${w.dateRange}</h3>
             </div>
-          </div>
-          <div class="space-y-4">
+            <div class="space-y-4">
         `;
-
-        const filteredSessions = week.sessions.filter(s => filter === 'all' || s.category === filter);
-
-        filteredSessions.forEach(sess => {
-          weekHTML += `
-            <div class="bg-white border thin-border rounded-xl p-5 space-y-3 shadow-sm">
-              <div class="flex flex-col md:flex-row justify-between md:items-center gap-2">
-                <div>
-                  <span class="text-xs font-mono text-stone-500 capitalize">${sess.date}</span>
-                  <h4 class="text-base font-bold text-stone-900">${sess.title}</h4>
-                </div>
+        w.sessions.forEach(s => {
+          html += `
+            <div class="bg-white border thin-border rounded-xl p-5 space-y-3 ${s.completed ? 'bg-emerald-50/40 border-emerald-200' : ''}">
+              <div class="flex justify-between items-center">
                 <div class="flex items-center gap-3">
-                  <span class="text-xs font-mono bg-stone-100 px-2.5 py-1 rounded border thin-border">${sess.duration}</span>
-                  ${sess.trailData ? `<span class="text-xs font-mono bg-stone-100 px-2.5 py-1 rounded border thin-border text-accent">${sess.trailData}</span>` : ''}
-                  <button onclick="toggleSessionInline('${sess.id}')" class="text-xs font-mono text-stone-600 hover:text-stone-900 underline">
-                    Détails
+                  <button onclick="toggleComplete('${s.id}')" class="w-5 h-5 rounded border thin-border flex items-center justify-center ${s.completed ? 'bg-emerald-600 text-white' : 'bg-white'}">
+                    ${s.completed ? '✓' : ''}
                   </button>
+                  <div>
+                    <span class="text-xs font-mono text-stone-500">${s.date}</span>
+                    <h4 class="text-base font-bold ${s.completed ? 'line-through text-stone-400' : 'text-stone-900'}">${s.title}</h4>
+                  </div>
                 </div>
-              </div>
-
-              <div id="inline-${sess.id}" class="hidden pt-4 border-t thin-border space-y-6">
-                ${renderWorkoutHTML(sess.details)}
+                <button onclick="openModal('${s.id}')" class="text-xs font-mono underline text-stone-600">Détails</button>
               </div>
             </div>
           `;
         });
-
-        weekHTML += `</div>`;
-        weekBlock.innerHTML = weekHTML;
-        container.appendChild(weekBlock);
+        html += `</div></div>`;
+        container.innerHTML += html;
       });
     }
 
-    // RENDER WORKOUT HTML
-    function renderWorkoutHTML(details) {
-      if (!details) return '<p class="text-xs font-mono text-stone-500">Aucun détail disponible.</p>';
-
-      let html = '';
-
-      if (details.warmup) {
-        html += `
-          <div class="space-y-2">
-            <h5 class="text-xs font-mono uppercase text-stone-500 font-semibold">1. Échauffement Dynamique (${details.warmup.duration})</h5>
-            <p class="text-xs italic text-stone-600">${details.warmup.instructions}</p>
-            <ul class="list-disc list-inside text-xs text-stone-700 space-y-1 bg-stone-50 p-3 rounded border thin-border">
-              ${details.warmup.items.map(item => `<li>${item}</li>`).join('')}
-            </ul>
-          </div>
-        `;
-      }
-
-      if (details.circuit) {
-        html += `
-          <div class="space-y-3">
-            <div class="flex justify-between items-baseline">
-              <h5 class="text-xs font-mono uppercase text-stone-500 font-semibold">2. Corps de la Séance (${details.circuit.duration})</h5>
-              <span class="text-[11px] font-mono text-stone-500">${details.circuit.structure}</span>
-            </div>
-
-            <div class="overflow-x-auto">
-              <table class="w-full text-left text-xs border-collapse">
-                <thead>
-                  <tr class="border-b thin-border bg-stone-100 text-stone-600 font-mono">
-                    <th class="p-2.5">Exercice</th>
-                    <th class="p-2.5">Matériel & Position</th>
-                    <th class="p-2.5">Focus Trail & Consignes</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y thin-border">
-                  ${details.circuit.exercises.map(ex => `
-                    <tr>
-                      <td class="p-2.5 font-semibold text-stone-900">${ex.name}</td>
-                      <td class="p-2.5 font-mono text-stone-600">${ex.mat}</td>
-                      <td class="p-2.5 text-stone-700">${ex.focus}</td>
-                    </tr>
-                  `).join('')}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        `;
-      }
-
-      if (details.cooldown) {
-        html += `
-          <div class="space-y-2">
-            <h5 class="text-xs font-mono uppercase text-stone-500 font-semibold">3. Retour au calme (${details.cooldown.duration})</h5>
-            <ul class="list-disc list-inside text-xs text-stone-700 space-y-1 bg-stone-50 p-3 rounded border thin-border">
-              ${details.cooldown.items.map(item => `<li>${item}</li>`).join('')}
-            </ul>
-          </div>
-        `;
-      }
-
-      return html;
+    function toggleComplete(id) {
+      state.weeks.forEach(w => w.sessions.forEach(s => { if(s.id === id) s.completed = !s.completed; }));
+      saveState();
+      renderWeeksList();
     }
 
-    // ACTIONS
-    function toggleSessionInline(sessionId) {
-      const target = document.getElementById(`inline-${sessionId}`);
-      if (target) target.classList.toggle('hidden');
-    }
-
-    let currentModalSessionId = null;
-
-    function openModal(sessionId) {
-      let foundSess = null;
-      appState.weeks.forEach(w => {
-        const s = w.sessions.find(x => x.id === sessionId);
-        if (s) foundSess = s;
-      });
-
-      if (!foundSess) return;
-
-      currentModalSessionId = sessionId;
-      document.getElementById('modal-tag').innerText = foundSess.type;
-      document.getElementById('modal-title').innerText = foundSess.title;
-      document.getElementById('modal-subtitle').innerText = `${foundSess.duration} — Organisé selon votre équipement`;
-      document.getElementById('modal-body').innerHTML = renderWorkoutHTML(foundSess.details);
-
+    let activeModalId = null;
+    function openModal(id) {
+      let sess = null;
+      state.weeks.forEach(w => w.sessions.forEach(s => { if(s.id === id) sess = s; }));
+      if(!sess) return;
+      activeModalId = id;
+      document.getElementById('modal-title').innerText = sess.title;
+      document.getElementById('modal-subtitle').innerText = sess.date;
+      
+      let d = sess.details;
+      let html = `<div class="space-y-4">`;
+      if(d.warmup) html += `<div><h5 class="text-xs font-mono uppercase text-stone-500">Échauffement (${d.warmup.duration})</h5><ul class="list-disc list-inside text-xs text-stone-700 bg-stone-50 p-3 rounded">${d.warmup.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
+      if(d.circuit) html += `<div><h5 class="text-xs font-mono uppercase text-stone-500">Corps de Séance (${d.circuit.duration})</h5><p class="text-xs italic text-stone-600 mb-2">${d.circuit.structure}</p><table class="w-full text-left text-xs border-collapse"><tr class="border-b bg-stone-100"><th class="p-2">Exercice</th><th class="p-2">Matériel</th><th class="p-2">Focus</th></tr>${d.circuit.exercises.map(e=>`<tr class="border-b"><td class="p-2 font-semibold">${e.name}</td><td class="p-2 font-mono">${e.mat}</td><td class="p-2">${e.focus}</td></tr>`).join('')}</table></div>`;
+      if(d.cooldown) html += `<div><h5 class="text-xs font-mono uppercase text-stone-500">Retour au calme (${d.cooldown.duration})</h5><ul class="list-disc list-inside text-xs text-stone-700 bg-stone-50 p-3 rounded">${d.cooldown.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
+      html += `</div>`;
+      
+      document.getElementById('modal-body').innerHTML = html;
       document.getElementById('modal-container').classList.remove('hidden');
     }
 
-    function closeModal() {
-      document.getElementById('modal-container').classList.add('hidden');
-    }
-
-    function validateCurrentModalSession() {
-      if (currentModalSessionId) {
-        alert("Séance accomplie ! Données enregistrées.");
-        closeModal();
-      }
-    }
+    function closeModal() { document.getElementById('modal-container').classList.add('hidden'); }
+    function validateCurrentModalSession() { if(activeModalId) { toggleComplete(activeModalId); closeModal(); } }
 
     function switchTab(tab) {
       document.getElementById('view-overview').classList.add('hidden');
       document.getElementById('view-plan').classList.add('hidden');
-      document.getElementById('view-config').classList.add('hidden');
-
-      document.getElementById('nav-overview').className = "text-stone-400 hover:text-stone-700 transition-all";
-      document.getElementById('nav-plan').className = "text-stone-400 hover:text-stone-700 transition-all";
-      document.getElementById('nav-config').className = "text-stone-400 hover:text-stone-700 transition-all";
-
       document.getElementById(`view-${tab}`).classList.remove('hidden');
-      document.getElementById(`nav-${tab}`).className = "text-stone-900 border-b border-stone-900 pb-0.5 transition-all";
-
-      if (tab === 'plan') renderWeeksList();
+      if(tab==='plan') renderWeeksList();
     }
 
-    function filterSessions(cat) {
-      renderWeeksList(cat);
-    }
-
-    function saveConfiguration() {
-      appState.event.name = document.getElementById('cfg-name').value;
-      appState.event.date = document.getElementById('cfg-date').value;
-      appState.event.distance = parseFloat(document.getElementById('cfg-dist').value) || 42;
-      appState.event.deniv = parseFloat(document.getElementById('cfg-deniv').value) || 2800;
-      appState.event.terrain = document.getElementById('cfg-terrain').value;
-
-      appState.equipment.door = document.getElementById('mat-door').checked;
-      appState.equipment.elastic = document.getElementById('mat-elastic').checked;
-      appState.equipment.chair = document.getElementById('mat-chair').checked;
-      appState.equipment.wall = document.getElementById('mat-wall').checked;
-      appState.equipment.dumbbells = document.getElementById('mat-dumbbells').checked;
-      appState.equipment.poles = document.getElementById('mat-poles').checked;
-
-      generateFullProgram();
-      renderOverview();
-      switchTab('overview');
-    }
-
-    // INITIALIZATION
-    window.addEventListener('DOMContentLoaded', () => {
-      generateFullProgram();
-      renderOverview();
-    });
+    window.addEventListener('DOMContentLoaded', () => { renderOverview(); });
   </script>
 </body>
 </html>
