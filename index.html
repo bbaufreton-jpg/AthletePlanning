@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ATHLETE ARCHITECTURE — Trail & Performance</title>
+  <title>ATHLETE ARCHITECTURE — Programme Complet Multi-Semaines</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +27,7 @@
               700: '#4d4234',
               900: '#1c1814',
             },
-            accent: '#8b3a1a', // Terracotta élégant
+            accent: '#8b3a1a',
           }
         }
       }
@@ -64,7 +64,7 @@
       
       <nav class="flex items-center gap-6 text-sm font-medium">
         <button onclick="switchTab('overview')" id="nav-overview" class="text-stone-900 border-b border-stone-900 pb-0.5 transition-all">Tableau de bord</button>
-        <button onclick="switchTab('plan')" id="nav-plan" class="text-stone-400 hover:text-stone-700 transition-all">Programme & Séances</button>
+        <button onclick="switchTab('plan')" id="nav-plan" class="text-stone-400 hover:text-stone-700 transition-all">Programme Complet</button>
         <button onclick="switchTab('config')" id="nav-config" class="text-stone-400 hover:text-stone-700 transition-all">Événement & Réglages</button>
       </nav>
     </div>
@@ -78,12 +78,12 @@
       <!-- HEADER BANNER -->
       <div class="border-b thin-border pb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div>
-          <span class="text-xs uppercase tracking-widest font-mono text-stone-500 mb-2 block">Préparation Objectif</span>
-          <h2 id="hero-event-name" class="text-3xl md:text-4xl font-bold tracking-tight text-stone-900">Trail des Aiguilles Rouge</h2>
-          <p id="hero-event-details" class="text-stone-600 mt-2 text-sm">42 km — 2800m D+ — Objectif Finisher en maîtrise</p>
+          <span class="text-xs uppercase tracking-widest font-mono text-stone-500 mb-2 block">Planification Périodisée</span>
+          <h2 id="hero-event-name" class="text-3xl md:text-4xl font-bold tracking-tight text-stone-900">Trail des Aiguilles Rouges</h2>
+          <p id="hero-event-details" class="text-stone-600 mt-2 text-sm">42 km — 2800m D+ — Terrain Très technique / Montagne</p>
         </div>
         <div class="flex items-baseline gap-2 bg-stone-100 px-5 py-3 rounded-lg border thin-border">
-          <span class="text-xs text-stone-500 font-mono uppercase">Jour J dans</span>
+          <span class="text-xs text-stone-500 font-mono uppercase">Objectif dans</span>
           <span id="countdown-days" class="text-3xl font-bold font-mono text-accent">--</span>
           <span class="text-xs font-mono text-stone-500">jours</span>
         </div>
@@ -104,19 +104,19 @@
       <!-- METRICS GRID -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
         <div class="bg-white border thin-border p-6 rounded-xl space-y-2">
-          <span class="text-xs font-mono text-stone-500 uppercase">Volume Hebdo Prévu</span>
-          <div id="stat-weekly-volume" class="text-2xl font-bold text-stone-900">--h--</div>
-          <p class="text-xs text-stone-500">Adapté à la phase courante</p>
+          <span class="text-xs font-mono text-stone-500 uppercase">Durée de Préparation</span>
+          <div id="stat-weeks-total" class="text-2xl font-bold text-stone-900">-- semaines</div>
+          <p id="stat-phase-desc" class="text-xs text-stone-500">Du foncier à l'affûtage</p>
         </div>
         <div class="bg-white border thin-border p-6 rounded-xl space-y-2">
-          <span class="text-xs font-mono text-stone-500 uppercase">Dénivelé Cible (D+)</span>
-          <div id="stat-weekly-elevation" class="text-2xl font-bold text-stone-900">-- m</div>
-          <p class="text-xs text-stone-500">Répartition spécifique Trail</p>
+          <span class="text-xs font-mono text-stone-500 uppercase">Ratio D+/km Épreuve</span>
+          <div id="stat-ratio-deniv" class="text-2xl font-bold text-accent">-- m/km</div>
+          <p id="stat-ratio-desc" class="text-xs text-stone-500">Profil de pente du parcours</p>
         </div>
         <div class="bg-white border thin-border p-6 rounded-xl space-y-2">
-          <span class="text-xs font-mono text-stone-500 uppercase">Programmes Actifs</span>
-          <div id="stat-active-programs" class="text-2xl font-bold text-stone-900">Trail + Renfo</div>
-          <p class="text-xs text-stone-500">Planification combinée</p>
+          <span class="text-xs font-mono text-stone-500 uppercase">Total Séances Planifiées</span>
+          <div id="stat-total-sessions" class="text-2xl font-bold text-stone-900">-- séances</div>
+          <p class="text-xs text-stone-500">Harmonisation Trail + Renfo</p>
         </div>
       </div>
     </section>
@@ -125,8 +125,8 @@
     <section id="view-plan" class="hidden space-y-8">
       <div class="flex flex-col md:flex-row justify-between md:items-center gap-4 border-b thin-border pb-6">
         <div>
-          <h2 class="text-2xl font-bold tracking-tight text-stone-900">Planning & Séances Détaillées</h2>
-          <p class="text-stone-600 text-sm mt-1">Séances datées et structurées selon vos disponibilités et votre matériel.</p>
+          <h2 class="text-2xl font-bold tracking-tight text-stone-900">Programme Semaine par Semaine</h2>
+          <p class="text-stone-600 text-sm mt-1">Chaque semaine comporte ses phases spécifiques (Foncier, D+, Affûtage).</p>
         </div>
         <div class="flex gap-2">
           <button onclick="filterSessions('all')" class="px-3 py-1.5 text-xs font-mono rounded border thin-border bg-stone-900 text-white">Toutes</button>
@@ -135,8 +135,8 @@
         </div>
       </div>
 
-      <!-- SESSIONS LIST -->
-      <div id="sessions-container" class="space-y-6">
+      <!-- SESSIONS BY WEEK CONTAINER -->
+      <div id="weeks-container" class="space-y-10">
         <!-- Rendered by JS -->
       </div>
     </section>
@@ -145,35 +145,35 @@
     <section id="view-config" class="hidden max-w-2xl mx-auto space-y-8">
       <div class="border-b thin-border pb-6">
         <h2 class="text-2xl font-bold tracking-tight text-stone-900">Configuration de la Préparation</h2>
-        <p class="text-stone-600 text-sm mt-1">Ajustez les spécificités de votre épreuve et votre équipement disponible.</p>
+        <p class="text-stone-600 text-sm mt-1">Fixez votre date butoir : le moteur recalculera le calendrier complet sur toutes les semaines.</p>
       </div>
 
-      <form id="config-form" class="space-y-6">
+      <form id="config-form" onsubmit="event.preventDefault(); saveConfiguration();" class="space-y-6">
         <div class="space-y-4">
-          <h3 class="text-sm font-semibold text-stone-900 border-b thin-border pb-2">1. L'Événement Cible</h3>
+          <h3 class="text-sm font-semibold text-stone-900 border-b thin-border pb-2">1. Votre Événement & Date Butoir</h3>
           <div>
             <label class="block text-xs font-mono text-stone-600 mb-1">Nom de l'épreuve</label>
             <input type="text" id="cfg-name" value="Trail des Aiguilles Rouges" class="w-full bg-white border thin-border rounded px-3 py-2 text-sm focus:outline-none focus:border-stone-900">
           </div>
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-mono text-stone-600 mb-1">Date de l'événement</label>
-              <input type="date" id="cfg-date" value="2026-11-15" class="w-full bg-white border thin-border rounded px-3 py-2 text-sm focus:outline-none focus:border-stone-900">
+              <label class="block text-xs font-mono text-stone-600 mb-1">Date de l'événement (Jour J)</label>
+              <input type="date" id="cfg-date" value="2026-11-29" class="w-full bg-white border thin-border rounded px-3 py-2 text-sm focus:outline-none focus:border-stone-900">
             </div>
             <div>
-              <label class="block text-xs font-mono text-stone-600 mb-1">Distance (km)</label>
-              <input type="number" id="cfg-dist" value="42" class="w-full bg-white border thin-border rounded px-3 py-2 text-sm focus:outline-none focus:border-stone-900">
+              <label class="block text-xs font-mono text-stone-600 mb-1">Distance totale (km)</label>
+              <input type="number" id="cfg-dist" value="42" min="1" class="w-full bg-white border thin-border rounded px-3 py-2 text-sm focus:outline-none focus:border-stone-900">
             </div>
           </div>
           <div class="grid grid-cols-2 gap-4">
             <div>
               <label class="block text-xs font-mono text-stone-600 mb-1">Dénivelé positif (m D+)</label>
-              <input type="number" id="cfg-deniv" value="2800" class="w-full bg-white border thin-border rounded px-3 py-2 text-sm focus:outline-none focus:border-stone-900">
+              <input type="number" id="cfg-deniv" value="2800" min="0" class="w-full bg-white border thin-border rounded px-3 py-2 text-sm focus:outline-none focus:border-stone-900">
             </div>
             <div>
               <label class="block text-xs font-mono text-stone-600 mb-1">Type de terrain</label>
               <select id="cfg-terrain" class="w-full bg-white border thin-border rounded px-3 py-2 text-sm focus:outline-none focus:border-stone-900">
-                <option value="technique">Très technique / Montagne</option>
+                <option value="technique" selected>Très technique / Montagne</option>
                 <option value="moyen">Moyen / Sentiers vallonnés</option>
                 <option value="roulant">Roulant / Pistes forestières</option>
               </select>
@@ -182,7 +182,7 @@
         </div>
 
         <div class="space-y-4 pt-4">
-          <h3 class="text-sm font-semibold text-stone-900 border-b thin-border pb-2">2. Matériel à disposition (Renforcement)</h3>
+          <h3 class="text-sm font-semibold text-stone-900 border-b thin-border pb-2">2. Matériel à disposition pour le Renforcement</h3>
           <div class="grid grid-cols-2 gap-3 text-sm">
             <label class="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" id="mat-door" checked class="rounded border-stone-300">
@@ -205,15 +205,15 @@
               <span>Haltères / Kettlebell</span>
             </label>
             <label class="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" id="mat-mat" checked class="rounded border-stone-300">
-              <span>Tapis de sol</span>
+              <input type="checkbox" id="mat-poles" checked class="rounded border-stone-300">
+              <span>Bâtons de trail</span>
             </label>
           </div>
         </div>
 
         <div class="pt-6">
-          <button type="button" onclick="saveConfiguration()" class="w-full bg-stone-900 text-white font-medium py-3 rounded hover:bg-stone-800 transition-all text-sm">
-            Mettre à jour le programme
+          <button type="submit" class="w-full bg-stone-900 text-white font-medium py-3 rounded hover:bg-stone-800 transition-all text-sm">
+            Générer le programme multi-semaines →
           </button>
         </div>
       </form>
@@ -224,8 +224,8 @@
   <!-- FOOTER -->
   <footer class="border-t thin-border py-6 bg-white text-xs text-stone-500 font-mono">
     <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
-      <span>ATHLETE ARCHITECTURE — Trail & Endurance Engine</span>
-      <span>Données sauvegardées localement</span>
+      <span>ATHLETE ARCHITECTURE — Smart Multi-Week Engine</span>
+      <span>Calcul du calendrier dynamique</span>
     </div>
   </footer>
 
@@ -237,7 +237,7 @@
         <div>
           <span id="modal-tag" class="text-xs font-mono uppercase tracking-widest text-accent font-semibold">Renforcement Spécifique</span>
           <h3 id="modal-title" class="text-2xl font-bold text-stone-900 mt-1">Séance Trail & Stabilité</h3>
-          <p id="modal-subtitle" class="text-xs font-mono text-stone-500 mt-1">35 - 40 min — Matériel : Chaise, Élastique, Porte</p>
+          <p id="modal-subtitle" class="text-xs font-mono text-stone-500 mt-1">35 - 40 min — Organisé selon l'épreuve</p>
         </div>
         <button onclick="closeModal()" class="text-stone-400 hover:text-stone-900 text-2xl font-light">✕</button>
       </div>
@@ -255,145 +255,234 @@
     </div>
   </div>
 
-  <!-- SCRIPT LOGIC -->
+  <!-- SCRIPT ENGINE (MULTI-WEEK GENERATOR) -->
   <script>
-    // DATA STATE
+    // STATE
     let appState = {
       event: {
         name: "Trail des Aiguilles Rouges",
-        date: "2026-11-15",
+        date: "2026-11-29",
         distance: 42,
         deniv: 2800,
         terrain: "technique"
       },
-      equipment: ["door", "elastic", "chair", "wall", "mat"],
-      sessions: []
+      equipment: {
+        door: true,
+        elastic: true,
+        chair: true,
+        wall: true,
+        dumbbells: false,
+        poles: true
+      },
+      weeks: [] // Stores week blocks with sessions
     };
 
-    // SAMPLE DETAILED TRAIL STRENGTH WORKOUT (EXACT STRUCTURE)
-    const trailStrengthWorkout = {
-      warmup: {
-        duration: "6 minutes",
-        instructions: "2 tours sans pause entre les exercices :",
-        items: [
-          "40 sec — Course sur place avec montée de genoux progressive",
-          "40 sec — Montées sur pointe de pieds + rotations de chevilles",
-          "40 sec — Squats légers poids du corps",
-          "40 sec — Écarteurs à l'élastique (band pull-a-part)",
-          "40 sec — Fentes arrière alternées"
-        ]
-      },
-      circuit: {
-        duration: "25 minutes",
-        structure: "4 à 5 tours — 40 sec de travail / 20 sec de repos par exercice. 1 min 30 de pause entre chaque tour.",
-        exercises: [
-          {
-            name: "1. Step-ups dynamiques ou Squat bulgare",
-            mat: "Chaise / Step",
-            focus: "Montées / Puissance : Pose le pied sur la chaise, pousse fort sur le talon pour monter en élevant le genou opposé en haut. (20s jambe gauche / 20s jambe droite)"
-          },
-          {
-            name: "2. Tirage face à la porte + Fente arrière",
-            mat: "Ancrage Porte (hauteur poitrine)",
-            focus: "Posture & Chaîne postérieure : En faisant une fente arrière, tire les coudes vers l'arrière en serrant les omoplates. Reviens debout en relâchant."
-          },
-          {
-            name: "3. Chaise statique + Monte-pointe",
-            mat: "Mur",
-            focus: "Endurance quadriceps (Descentes) & Mollets : Plaque le dos au mur à 90°. Maintiens la position et décolle alternativement les talons du sol."
-          },
-          {
-            name: "4. Marche du monstre / Fentes latérales",
-            mat: "Élastique autour des cuisses",
-            focus: "Moyen fessier & Stabilité genoux/chevilles : Place l'élastique au-dessus des genoux. Petits pas latéraux en position semi-fléchie, buste droit."
-          },
-          {
-            name: "5. Presse Pallof avec montée de genou",
-            mat: "Ancrage Porte (hauteur poitrine)",
-            focus: "Gainage & Équilibre Trail : De profil à la porte. Tends les bras devant toi tout en montant le genou extérieur à 90°. (20s d'un côté / 20s de l'autre)"
-          }
-        ]
-      },
-      cooldown: {
-        duration: "5 minutes",
-        items: [
-          "Étirements ciblés (30s par jambe) : Quadriceps, Mollets au mur, Fessiers",
-          "2 min : Respiration profonde allongé au sol, jambes relevées sur la chaise (retour veineux)"
-        ]
+    // GENERATE WORKOUT ROUTINE BASED ON EQUIPMENT AND PHASE
+    function buildRenfoWorkout(phase, ratio, eq) {
+      let isTapering = phase === "Affûtage";
+      let isHighSteepness = ratio > 40;
+
+      let exercises = [];
+
+      // Ex 1: Force Cuisses
+      if (eq.chair) {
+        exercises.push({
+          name: isTapering ? "1. Step-ups légers de rappel" : "1. Step-ups dynamiques explosifs",
+          mat: "Chaise / Step",
+          focus: isTapering ? "Maintien tonique sans fatigue" : "Poussée de jambe type fort D+ : Pousse fort sur le talon."
+        });
+      } else {
+        exercises.push({
+          name: "1. Squats contrôlés",
+          mat: "Poids du corps",
+          focus: "Focus alignement genou-cheville."
+        });
       }
-    };
 
-    // GENERATE SESSIONS BASED ON DATE
-    function generateSessions() {
-      const today = new Date();
-      const sessions = [];
+      // Ex 2: Tirage / Haut du corps
+      if (eq.door) {
+        exercises.push({
+          name: "2. Tirage porte + Fente arrière",
+          mat: "Ancrage Porte",
+          focus: "Posture & Poussée Bâtons : Resserre les omoplates."
+        });
+      } else if (eq.elastic) {
+        exercises.push({
+          name: "2. Row debout à l'élastique",
+          mat: "Élastique sous les pieds",
+          focus: "Gainage haut du corps & fixation scapulaire."
+        });
+      } else {
+        exercises.push({
+          name: "2. Soulevé de terre unipodal (RDL)",
+          mat: "Poids du corps",
+          focus: "Ischio-jambiers & Fessiers."
+        });
+      }
 
-      // Session 1: Renfo Trail (Aujourd'hui)
-      const d1 = new Date(today);
-      sessions.push({
-        id: "sess-1",
-        date: formatDate(d1),
-        type: "Renforcement",
-        category: "renfo",
-        title: "Renforcement Spécifique Trail & Stabilité",
-        duration: "35-40 min",
-        status: "pending",
-        details: trailStrengthWorkout
+      // Ex 3: Excentrique Quadriceps (Descente)
+      if (eq.wall) {
+        exercises.push({
+          name: "3. Chaise murale + Décollement talons",
+          mat: "Mur",
+          focus: "Protection des genoux en descente raide."
+        });
+      } else {
+        exercises.push({
+          name: "3. Step-down excentrique",
+          mat: "Marche d'escalier",
+          focus: "Descente très lente contrôlée."
+        });
+      }
+
+      // Ex 4: Cheville / Moyen fessier
+      if (eq.elastic) {
+        exercises.push({
+          name: "4. Marche du monstre / Fentes latérales",
+          mat: "Élastique",
+          focus: "Moyen fessier & Stabilité cheville sur terrain instable."
+        });
+      } else {
+        exercises.push({
+          name: "4. Équilibre unipodal yeux fermés",
+          mat: "Poids du corps",
+          focus: "Proprioception cheville."
+        });
+      }
+
+      // Ex 5: Gainage
+      exercises.push({
+        name: "5. Gainage dynamique / Press Pallof",
+        mat: eq.door ? "Porte" : "Tapis de sol",
+        focus: "Gainage pour le port du sac à dos de trail."
       });
 
-      // Session 2: Trail Côtes
-      const d2 = new Date(today);
-      d2.setDate(d2.getDate() + 2);
-      sessions.push({
-        id: "sess-2",
-        date: formatDate(d2),
-        type: "Trail / D+",
-        category: "trail",
-        title: "Fract. Côte & Technique de Descente",
-        duration: "1h10",
-        status: "pending",
-        trailData: "450m D+",
-        details: {
-          warmup: { duration: "15 min", instructions: "Footing progressif plat + 4 lignes droites" },
-          circuit: {
-            duration: "40 min",
-            structure: "Bloc Côtes + Descente",
-            exercises: [
-              { name: "6 x 2 min en Côte (8-10%)", mat: "Terrain vallonné", focus: "Poussée active, buste droit, rcupération en redescente lente" },
-              { name: "10 min Technique Descente", mat: "Sentier technique", focus: "Fréquence de foulée élevée, appuis légers, regard à 5 mètres" }
-            ]
-          },
-          cooldown: { duration: "10 min", items: ["Retour au calme très lent sur plat"] }
+      return {
+        warmup: {
+          duration: "6 min",
+          instructions: "2 tours d'activation :",
+          items: ["40s course sur place", "40s montées de pointe", "40s squats légers", "40s fentes arrière"]
+        },
+        circuit: {
+          duration: isTapering ? "18 minutes" : "26 minutes",
+          structure: isTapering ? "3 tours légers — 30s travail / 30s repos" : "4 à 5 tours — 40s travail / 20s repos",
+          exercises: exercises
+        },
+        cooldown: {
+          duration: "5 min",
+          items: ["Étirements doux Quadriceps & Mollets", "2 min élévation des jambes (retour veineux)"]
         }
-      });
+      };
+    }
 
-      // Session 3: Sortie Longue D+
-      const d3 = new Date(today);
-      d3.setDate(d3.getDate() + 4);
-      sessions.push({
-        id: "sess-3",
-        date: formatDate(d3),
-        type: "Sortie Longue",
-        category: "trail",
-        title: "Sortie Longue Spécifique Montagne",
-        duration: "2h30",
-        status: "pending",
-        trailData: "1100m D+",
-        details: {
-          warmup: { duration: "10 min", instructions: "Mise en route progressive" },
-          circuit: {
-            duration: "2h10",
-            structure: "Gestion de l'effort & Alimentation",
-            exercises: [
-              { name: "Montées à allure régulée", mat: "Bâtons de trail", focus: "Utilisation active des bâtons, travail au cardio cible zone 2" },
-              { name: "Test alimentation", mat: "Bidons + Gels", focus: "Prise d'eau/glucides toutes les 30 minutes" }
-            ]
-          },
-          cooldown: { duration: "10 min", items: ["Marche et récupération"] }
+    // MULTI-WEEK GENERATION ENGINE
+    function generateFullProgram() {
+      const targetDate = new Date(appState.event.date);
+      const now = new Date();
+      const diffTime = targetDate - now;
+      const totalDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      
+      // Calculate total full weeks (minimum 2 weeks, max 16)
+      let numWeeks = Math.max(2, Math.min(16, Math.ceil(totalDays / 7)));
+      const ratio = Math.round(appState.event.deniv / appState.event.distance);
+
+      let weeks = [];
+      let currentDate = new Date();
+
+      for (let w = 1; w <= numWeeks; w++) {
+        // Determine phase
+        let phase = "Foncière";
+        if (w > numWeeks - 2) {
+          phase = "Affûtage"; // Last 2 weeks = tapering
+        } else if (w > Math.floor(numWeeks / 3)) {
+          phase = "Spécifique D+";
         }
-      });
 
-      appState.sessions = sessions;
+        // Calculate week dates
+        const weekStart = new Date(currentDate);
+        const weekEnd = new Date(currentDate);
+        weekEnd.setDate(weekEnd.getDate() + 6);
+
+        // Week sessions
+        const session1Date = new Date(weekStart); // Mardi
+        session1Date.setDate(session1Date.getDate() + 1);
+
+        const session2Date = new Date(weekStart); // Jeudi
+        session2Date.setDate(session2Date.getDate() + 3);
+
+        const session3Date = new Date(weekStart); // Dimanche
+        session3Date.setDate(session3Date.getDate() + 6);
+
+        // Session volumes per phase
+        let renfoDur = phase === "Affûtage" ? "25 min" : "40 min";
+        let trail1Dur = phase === "Affûtage" ? "45 min" : "1h10";
+        let trail2Dur = phase === "Affûtage" ? "1h15" : (phase === "Spécifique D+" ? "2h40" : "1h45");
+        let dPlusTarget = phase === "Affûtage" ? Math.round(appState.event.deniv * 0.15) : (phase === "Spécifique D+" ? Math.round(appState.event.deniv * 0.5) : Math.round(appState.event.deniv * 0.25));
+
+        weeks.push({
+          weekNumber: w,
+          phase: phase,
+          dateRange: `Du ${formatShortDate(weekStart)} au ${formatShortDate(weekEnd)}`,
+          sessions: [
+            {
+              id: `w${w}-s1`,
+              date: formatDate(session1Date),
+              type: "Renforcement",
+              category: "renfo",
+              title: `Renfo Spécifique (${phase})`,
+              duration: renfoDur,
+              details: buildRenfoWorkout(phase, ratio, appState.equipment)
+            },
+            {
+              id: `w${w}-s2`,
+              date: formatDate(session2Date),
+              type: "Trail / Intassité",
+              category: "trail",
+              title: phase === "Spécifique D+" ? "Fract. Côte & Technique Descente" : "Seuil Vallonné & Relances",
+              duration: trail1Dur,
+              trailData: `${Math.round(dPlusTarget * 0.35)}m D+`,
+              details: {
+                warmup: { duration: "15 min", instructions: "Footing progressif + éducatifs" },
+                circuit: {
+                  duration: "35 min",
+                  structure: phase === "Affûtage" ? "Rappels courts sans fatigue" : "Travail de pente soutenu",
+                  exercises: [
+                    { name: "Répétitions en Côte", mat: "Terrain de côte", focus: "Poussée active & buste droit" },
+                    { name: "Technique Descente", mat: "Sentier", focus: "Appuis légers avant-pied" }
+                  ]
+                },
+                cooldown: { duration: "10 min", items: ["Retour au calme lent"] }
+              }
+            },
+            {
+              id: `w${w}-s3`,
+              date: formatDate(session3Date),
+              type: "Sortie Longue",
+              category: "trail",
+              title: phase === "Affûtage" ? "Sortie Longue d'Affûtage" : "Sortie Longue Spécifique Épreuve",
+              duration: trail2Dur,
+              trailData: `${dPlusTarget}m D+`,
+              details: {
+                warmup: { duration: "10 min", instructions: "Mise en route lente" },
+                circuit: {
+                  duration: "1h30+",
+                  structure: "Gestion d'effort & Nutrition",
+                  exercises: [
+                    { name: "Montée régulière Zone 2", mat: appState.equipment.poles ? "Bâtons de trail" : "Poids du corps", focus: "Rythme cardiaque stabilisé" },
+                    { name: "Stratégie Ravito", mat: "Bidons + Gels", focus: "Apport glucidique toutes les 30 min" }
+                  ]
+                },
+                cooldown: { duration: "10 min", items: ["Marche & récupération"] }
+              }
+            }
+          ]
+        });
+
+        // Advance 7 days
+        currentDate.setDate(currentDate.getDate() + 7);
+      }
+
+      appState.weeks = weeks;
     }
 
     // UTILS
@@ -401,93 +490,118 @@
       return date.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
     }
 
+    function formatShortDate(date) {
+      return date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
+    }
+
     function calculateDaysToEvent() {
       const evt = new Date(appState.event.date);
       const now = new Date();
-      const diffTime = evt - now;
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      const diffDays = Math.ceil((evt - now) / (1000 * 60 * 60 * 24));
       return diffDays > 0 ? diffDays : 0;
     }
 
-    // RENDER FUNCTIONS
+    // RENDER OVERVIEW
     function renderOverview() {
+      const ratio = Math.round(appState.event.deniv / appState.event.distance);
+
       document.getElementById('hero-event-name').innerText = appState.event.name;
-      document.getElementById('hero-event-details').innerText = `${appState.event.distance} km — ${appState.event.deniv}m D+ — Terrain ${appState.event.terrain}`;
+      document.getElementById('hero-event-details').innerText = `${appState.event.distance} km — ${appState.event.deniv}m D+ — Terrain ${appState.event.terrain === 'technique' ? 'Très technique' : 'Roulant'}`;
       document.getElementById('countdown-days').innerText = calculateDaysToEvent();
 
-      const todaySess = appState.sessions[0];
+      document.getElementById('stat-weeks-total').innerText = `${appState.weeks.length} semaines`;
+      document.getElementById('stat-ratio-deniv').innerText = `${ratio} m/km`;
+      document.getElementById('stat-total-sessions').innerText = `${appState.weeks.length * 3} séances`;
+
+      // Highlight first session of Week 1
+      const firstSess = appState.weeks[0]?.sessions[0];
       const todayCard = document.getElementById('today-card-container');
 
-      if (todaySess) {
+      if (firstSess) {
         todayCard.innerHTML = `
           <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
             <div>
               <div class="flex items-center gap-2 mb-1">
-                <span class="px-2 py-0.5 text-[10px] font-mono uppercase bg-accent text-white rounded">${todaySess.type}</span>
-                <span class="text-xs font-mono text-stone-500">${todaySess.duration}</span>
+                <span class="px-2 py-0.5 text-[10px] font-mono uppercase bg-accent text-white rounded">${firstSess.type}</span>
+                <span class="text-xs font-mono text-stone-500">${firstSess.duration}</span>
+                <span class="text-xs font-mono text-stone-400">| Semaine 1 (Foncière)</span>
               </div>
-              <h4 class="text-xl font-bold text-stone-900">${todaySess.title}</h4>
+              <h4 class="text-xl font-bold text-stone-900">${firstSess.title}</h4>
             </div>
             <div class="flex gap-3">
-              <button onclick="toggleSessionInline('${todaySess.id}')" class="px-4 py-2 border thin-border text-xs font-mono rounded bg-white hover:bg-stone-50">
+              <button onclick="toggleSessionInline('${firstSess.id}')" class="px-4 py-2 border thin-border text-xs font-mono rounded bg-white hover:bg-stone-50">
                 Afficher le protocole ↓
               </button>
-              <button onclick="openModal('${todaySess.id}')" class="px-4 py-2 bg-stone-900 text-white text-xs font-mono rounded hover:bg-stone-800">
+              <button onclick="openModal('${firstSess.id}')" class="px-4 py-2 bg-stone-900 text-white text-xs font-mono rounded hover:bg-stone-800">
                 Mode Entraînement ↗
               </button>
             </div>
           </div>
 
-          <!-- INLINE WORKOUT PROTOCOL (HIDDEN BY DEFAULT) -->
-          <div id="inline-${todaySess.id}" class="hidden pt-6 border-t thin-border space-y-6">
-            ${renderWorkoutHTML(todaySess.details)}
+          <div id="inline-${firstSess.id}" class="hidden pt-6 border-t thin-border space-y-6">
+            ${renderWorkoutHTML(firstSess.details)}
           </div>
         `;
       }
-
-      document.getElementById('stat-weekly-volume').innerText = "4h 20m";
-      document.getElementById('stat-weekly-elevation').innerText = `${Math.round(appState.event.deniv * 0.4)} m`;
     }
 
-    function renderSessionsList(filter = 'all') {
-      const container = document.getElementById('sessions-container');
+    // RENDER MULTI-WEEK PROGRAM
+    function renderWeeksList(filter = 'all') {
+      const container = document.getElementById('weeks-container');
       container.innerHTML = '';
 
-      const filtered = appState.sessions.filter(s => filter === 'all' || s.category === filter);
+      appState.weeks.forEach(week => {
+        const weekBlock = document.createElement('div');
+        weekBlock.className = "space-y-4 border-l-2 border-stone-300 pl-4 md:pl-6";
 
-      filtered.forEach(sess => {
-        const card = document.createElement('div');
-        card.className = "bg-white border thin-border rounded-xl p-6 space-y-4 shadow-sm";
-        card.innerHTML = `
-          <div class="flex flex-col md:flex-row justify-between md:items-center gap-2 border-b thin-border pb-4">
+        let weekHTML = `
+          <div class="flex items-baseline justify-between border-b thin-border pb-2">
             <div>
-              <span class="text-xs font-mono text-stone-500 capitalize">${sess.date}</span>
-              <h3 class="text-lg font-bold text-stone-900">${sess.title}</h3>
-            </div>
-            <div class="flex items-center gap-3">
-              <span class="text-xs font-mono bg-stone-100 px-2.5 py-1 rounded border thin-border">${sess.duration}</span>
-              ${sess.trailData ? `<span class="text-xs font-mono bg-stone-100 px-2.5 py-1 rounded border thin-border text-accent">${sess.trailData}</span>` : ''}
-              <button onclick="toggleSessionInline('${sess.id}')" class="text-xs font-mono text-stone-600 hover:text-stone-900 underline">
-                Détails séance
-              </button>
+              <span class="text-xs font-mono uppercase tracking-widest text-accent font-semibold">Semaine ${week.weekNumber} — Phase ${week.phase}</span>
+              <h3 class="text-sm font-mono text-stone-500">${week.dateRange}</h3>
             </div>
           </div>
-
-          <div id="inline-${sess.id}" class="hidden pt-4 space-y-6">
-            ${renderWorkoutHTML(sess.details)}
-          </div>
+          <div class="space-y-4">
         `;
-        container.appendChild(card);
+
+        const filteredSessions = week.sessions.filter(s => filter === 'all' || s.category === filter);
+
+        filteredSessions.forEach(sess => {
+          weekHTML += `
+            <div class="bg-white border thin-border rounded-xl p-5 space-y-3 shadow-sm">
+              <div class="flex flex-col md:flex-row justify-between md:items-center gap-2">
+                <div>
+                  <span class="text-xs font-mono text-stone-500 capitalize">${sess.date}</span>
+                  <h4 class="text-base font-bold text-stone-900">${sess.title}</h4>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-xs font-mono bg-stone-100 px-2.5 py-1 rounded border thin-border">${sess.duration}</span>
+                  ${sess.trailData ? `<span class="text-xs font-mono bg-stone-100 px-2.5 py-1 rounded border thin-border text-accent">${sess.trailData}</span>` : ''}
+                  <button onclick="toggleSessionInline('${sess.id}')" class="text-xs font-mono text-stone-600 hover:text-stone-900 underline">
+                    Détails
+                  </button>
+                </div>
+              </div>
+
+              <div id="inline-${sess.id}" class="hidden pt-4 border-t thin-border space-y-6">
+                ${renderWorkoutHTML(sess.details)}
+              </div>
+            </div>
+          `;
+        });
+
+        weekHTML += `</div>`;
+        weekBlock.innerHTML = weekHTML;
+        container.appendChild(weekBlock);
       });
     }
 
-    // HELPER TO RENDER WORKOUT HTML (TABLE & BLOCKS)
+    // RENDER WORKOUT HTML
     function renderWorkoutHTML(details) {
-      if (!details) return '<p class="text-xs font-mono text-stone-500">Aucun détail disponible pour cette séance.</p>';
+      if (!details) return '<p class="text-xs font-mono text-stone-500">Aucun détail disponible.</p>';
 
       let html = '';
 
-      // WARMUP
       if (details.warmup) {
         html += `
           <div class="space-y-2">
@@ -500,7 +614,6 @@
         `;
       }
 
-      // CIRCUIT / MAIN WORKOUT
       if (details.circuit) {
         html += `
           <div class="space-y-3">
@@ -509,7 +622,6 @@
               <span class="text-[11px] font-mono text-stone-500">${details.circuit.structure}</span>
             </div>
 
-            <!-- EXERCISES TABLE -->
             <div class="overflow-x-auto">
               <table class="w-full text-left text-xs border-collapse">
                 <thead>
@@ -534,7 +646,6 @@
         `;
       }
 
-      // COOLDOWN
       if (details.cooldown) {
         html += `
           <div class="space-y-2">
@@ -549,25 +660,28 @@
       return html;
     }
 
-    // ACTIONS & INTERACTION
+    // ACTIONS
     function toggleSessionInline(sessionId) {
       const target = document.getElementById(`inline-${sessionId}`);
-      if (target) {
-        target.classList.toggle('hidden');
-      }
+      if (target) target.classList.toggle('hidden');
     }
 
     let currentModalSessionId = null;
 
     function openModal(sessionId) {
-      const sess = appState.sessions.find(s => s.id === sessionId);
-      if (!sess) return;
+      let foundSess = null;
+      appState.weeks.forEach(w => {
+        const s = w.sessions.find(x => x.id === sessionId);
+        if (s) foundSess = s;
+      });
+
+      if (!foundSess) return;
 
       currentModalSessionId = sessionId;
-      document.getElementById('modal-tag').innerText = sess.type;
-      document.getElementById('modal-title').innerText = sess.title;
-      document.getElementById('modal-subtitle').innerText = `${sess.duration} — Organisé selon votre équipement`;
-      document.getElementById('modal-body').innerHTML = renderWorkoutHTML(sess.details);
+      document.getElementById('modal-tag').innerText = foundSess.type;
+      document.getElementById('modal-title').innerText = foundSess.title;
+      document.getElementById('modal-subtitle').innerText = `${foundSess.duration} — Organisé selon votre équipement`;
+      document.getElementById('modal-body').innerHTML = renderWorkoutHTML(foundSess.details);
 
       document.getElementById('modal-container').classList.remove('hidden');
     }
@@ -578,7 +692,7 @@
 
     function validateCurrentModalSession() {
       if (currentModalSessionId) {
-        alert("Séance validée ! Progression mise à jour.");
+        alert("Séance accomplie ! Données enregistrées.");
         closeModal();
       }
     }
@@ -595,27 +709,35 @@
       document.getElementById(`view-${tab}`).classList.remove('hidden');
       document.getElementById(`nav-${tab}`).className = "text-stone-900 border-b border-stone-900 pb-0.5 transition-all";
 
-      if (tab === 'plan') renderSessionsList();
+      if (tab === 'plan') renderWeeksList();
     }
 
     function filterSessions(cat) {
-      renderSessionsList(cat);
+      renderWeeksList(cat);
     }
 
     function saveConfiguration() {
       appState.event.name = document.getElementById('cfg-name').value;
       appState.event.date = document.getElementById('cfg-date').value;
-      appState.event.distance = document.getElementById('cfg-dist').value;
-      appState.event.deniv = document.getElementById('cfg-deniv').value;
+      appState.event.distance = parseFloat(document.getElementById('cfg-dist').value) || 42;
+      appState.event.deniv = parseFloat(document.getElementById('cfg-deniv').value) || 2800;
       appState.event.terrain = document.getElementById('cfg-terrain').value;
 
+      appState.equipment.door = document.getElementById('mat-door').checked;
+      appState.equipment.elastic = document.getElementById('mat-elastic').checked;
+      appState.equipment.chair = document.getElementById('mat-chair').checked;
+      appState.equipment.wall = document.getElementById('mat-wall').checked;
+      appState.equipment.dumbbells = document.getElementById('mat-dumbbells').checked;
+      appState.equipment.poles = document.getElementById('mat-poles').checked;
+
+      generateFullProgram();
       renderOverview();
       switchTab('overview');
     }
 
     // INITIALIZATION
     window.addEventListener('DOMContentLoaded', () => {
-      generateSessions();
+      generateFullProgram();
       renderOverview();
     });
   </script>
